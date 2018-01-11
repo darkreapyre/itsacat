@@ -17,7 +17,7 @@
 
 **Confirm Subscription**
 
-## SageMaker Integration
+## Integration with SakeMaker Notebook Instance
 
 1. Create notebook instance
 2. Notebook instance settings
@@ -58,7 +58,7 @@
 ## Codebook Overview
 
 
->**Note:** Good idea to close SageMaker until training is complete by openeing the SageMaker console -> Noetbook instances -> Actions -> Stop.
+>**Note:** Good idea to close the SageMaker Notebook instance until training is complete by openning the SageMaker console -> Noetbook instances -> Actions -> Stop.
 
 ## Training the Classifier
 
