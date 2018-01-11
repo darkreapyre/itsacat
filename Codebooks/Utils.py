@@ -98,6 +98,7 @@ def load_data():
     
     return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
 
+"""
 def initialize_parameters(n_x, n_h, n_y):
     """
     Argument:
@@ -131,7 +132,9 @@ def initialize_parameters(n_x, n_h, n_y):
                   "b2": b2}
     
     return parameters
+"""
 
+"""
 def initialize_parameters_deep(layer_dims):
     """
     Arguments:
@@ -156,6 +159,7 @@ def initialize_parameters_deep(layer_dims):
 
         
     return parameters
+"""
 
 def linear_forward(A, W, b):
     """
@@ -209,7 +213,8 @@ def linear_activation_forward(A_prev, W, b, activation):
 
     return A, cache
 
-def L_model_forward(X, parameters):
+
+def forward_prop(X, parameters):
     """
     Implement forward propagation for the [LINEAR->RELU]*(L-1)->LINEAR->SIGMOID computation
     
@@ -316,12 +321,12 @@ def linear_activation_backward(dA, cache, activation):
     
     return dA_prev, dW, db
 
-def L_model_backward(AL, Y, caches):
+def backward_prop(AL, Y, caches):
     """
     Implement the backward propagation for the [LINEAR->RELU] * (L-1) -> LINEAR -> SIGMOID group
     
     Arguments:
-    AL -- probability vector, output of the forward propagation (L_model_forward())
+    AL -- probability vector, output of the forward propagation (forward_prop())
     Y -- true "label" vector (containing 0 if non-cat, 1 if cat)
     caches -- list of caches containing:
                 every cache of linear_activation_forward() with "relu" (there are (L-1) or them, indexes from 0 to L-2)
@@ -361,7 +366,7 @@ def update_parameters(parameters, grads, learning_rate):
     
     Arguments:
     parameters -- python dictionary containing your parameters 
-    grads -- python dictionary containing your gradients, output of L_model_backward
+    grads -- python dictionary containing your gradients, output of backward_prop
     
     Returns:
     parameters -- python dictionary containing your updated parameters 
@@ -395,7 +400,7 @@ def predict(X, y, parameters):
     p = np.zeros((1,m))
     
     # Forward propagation
-    probas, caches = L_model_forward(X, parameters)
+    probas, caches = forward_prop(X, parameters)
 
     
     # convert probas to 0/1 predictions
