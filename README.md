@@ -1,1 +1,1 @@
-# Neural Network Image Classification Demo
+# Cloud Native Neural Network Image Classification Demo
