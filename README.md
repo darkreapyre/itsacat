@@ -46,13 +46,38 @@
         - Action -> Select and action -> All ElastiCache actions (elasticache:*) 
         - Review Policy
         - Save changes
+    - The final Policy should look similar to this:
+    ```json
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "VisualEditor0",
+                    "Effect": "Allow",
+                    "Action": [
+                        "s3:PutObject",
+                        "s3:GetObject",
+                        "s3:ListBucket",
+                        "s3:DeleteObject"
+                    ],
+                    "Resource": "arn:aws:s3:::*"
+                },
+                {
+                    "Sid": "VisualEditor1",
+                    "Effect": "Allow",
+                    "Action": "elasticache:*",
+                    "Resource": "*"
+                }
+            ]
+        }
+    ```
 5. Actions -> Open
 6. Configure Libraries
     - Conda -> Conda environments -> python3
     - Available packages -> Search -> "redis"
         - redis
         - redis-py
-    - "Right Arrow" -> Install (pop-up)
+    - "Right Arrow" -> Install ??(pop-up)??
 7. Download Code
     - Files Tab -> New -> Terminal
     - ```shell
