@@ -90,9 +90,6 @@
 
 ## Codebook Overview
 
-
->**Note:** Good idea to close the SageMaker Notebook instance until training is complete by openning the SageMaker console -> Noetbook instances -> Select the instance Name -> Actions -> Stop.
-
 ## Training the Classifier
 
 - Sample e-mail:
