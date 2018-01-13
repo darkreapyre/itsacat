@@ -116,3 +116,21 @@
 ```
 
 ## Cleanup
+
+1. Delete the CloudFormnation Stack
+    - CloudFormation Service console
+    - Select the "bottom" stack in the **Stack Name** column.
+    - Actoions -> Delete Stack -> "Yes, Delete"
+2. Delete DynamoDB Tables
+    - DynamoDB Service console
+    - Select "Tables" in the navigation panel
+    - Check *NeuronLambda* -> Delete table -> Delete
+    - Repeat the above process for the *TrainerLambda* table.
+3. CloudWatch Logs
+    - CloudWatch Service console
+    - Select "Logs" in the navigsation panel
+    - Check */aws/lambda/LaunchLambda* -> Actions -> Delete log group -> Yes, Delete
+    - Repeat the above process for */aws/lambda/NeuronLambda*, */aws/lambda/S3TriggerLambda*, and */aws/lambda/S3TriggerLambda*.
+4. S3 Bucket
+    - Amazon S3 Service console
+    - Highlite the bucket -> Delete bucket
