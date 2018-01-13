@@ -12,7 +12,7 @@
 
 ## Deployment
 
-```shell
+```console
     Enter the AWS Region to use > "AWS REGION"
     Enter the S3 bucket to create > "UNIQUE S3 BUCKET"
     Enter the name of the Stack to deploy > "UNIQUE STACK NAME"
