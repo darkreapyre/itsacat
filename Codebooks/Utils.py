@@ -23,6 +23,24 @@ def load_data():
     
     return test_set_x_orig, test_set_y_orig, classes
 
+def forward_prop(X, parameters):
+
+def predict(X, Y, NN_parameters, trained_parameters):
+    """
+    Applies the Forward Propogation step with optmized paramters to the input data.
+    Compares the output to the labeled data to determine classification with a
+    threshold of 0.5.
+    
+    Arguments:
+    X -- Input data of any shape
+    Y -- Labels of shape (1, no.examples)
+    
+    Returns:
+    Y_pred -- The predicted label
+    """
+    # Run Forward Propagation on the input data
+    A = forward_prop(X, NN_parameters, trained_parameters)
+
 def print_mislabeled_images(classes, X, y, p):
     """
     Plots images where predictions and truth were different.
