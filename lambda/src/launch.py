@@ -351,8 +351,8 @@ def initialize_data(endpoint, parameters):
                 },
             ],
             ProvisionedThroughput={
-                'ReadCapacityUnits': 50,
-                'WriteCapacityUnits': 50
+                'ReadCapacityUnits': 20,
+                'WriteCapacityUnits': 20
             }
         )
         table.meta.client.get_waiter('table_exists').wait(TableName=t)

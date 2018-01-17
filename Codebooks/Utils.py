@@ -23,9 +23,58 @@ def load_data():
     
     return test_set_x_orig, test_set_y_orig, classes
 
-def forward_prop(X, parameters):
+def sigmoid(z):
+    """
+    Computes the sigmoid of z
 
-def predict(X, Y, NN_parameters, trained_parameters):
+    Arguments:
+    z -- A scalar or numpy array of any size
+
+    Return:
+    sigmoid(z)
+    """
+    return 1. / (1. + np.exp(-z))
+
+def relu(z):
+    """
+    Implement the ReLU function.
+
+    Arguments:
+    z -- Output of the linear layer, of any shape
+
+    Returns:
+    a -- Post-activation parameter, of the same shape as z
+    """
+    a = np.maximum(0, z)
+    # Debug statement
+    #assert(a.shape == z.shape)
+    return a
+
+def forward_prop(input, params, layers, activations):
+    """
+    Executes the Forward Propogation step.
+    
+    Arguments:
+    input -- Input data of shape (No. features, No. training examples)
+    params -- Trained Weights and Bias
+    layers -- Numer of hidden layers in the trained neural network
+    activations -- Activation function for each layer
+    """
+    A_prev = input
+    results = []
+    for l in range(1, layers+1):
+        W = params['W'+str(l)]
+        b = params['b'+str(l)]
+        Z = np.dot(W, A_prev) + b
+        if activations['layer'+str(l)] == 'relu':
+            A_prev = realu(Z)
+        if activations['layer'+str(l)] == 'sigmoid':
+            A_prev = sigmoid(Z)
+        results.append('A': A_prev)
+    output = results[-1]['A']
+    return output
+
+def predict(X, NN_parameters, trained_parameters):
     """
     Applies the Forward Propogation step with optmized paramters to the input data.
     Compares the output to the labeled data to determine classification with a
@@ -39,7 +88,12 @@ def predict(X, Y, NN_parameters, trained_parameters):
     Y_pred -- The predicted label
     """
     # Run Forward Propagation on the input data
-    A = forward_prop(X, NN_parameters, trained_parameters)
+    layers = NN_parameters['layers']
+    activations = NN_parameters['activations']
+    output = forward_prop(X, trained_parameters, layers, activations)
+    decision_boundry = np.vectorize(lambda x: 1 if x > 0.5 else 0)
+    Y_pred = decision_boundary(output)
+    return Y_pred
 
 def print_mislabeled_images(classes, X, y, p):
     """
