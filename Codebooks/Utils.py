@@ -50,7 +50,7 @@ def relu(z):
     #assert(a.shape == z.shape)
     return a
 
-def forward_prop(input, params, layers, activations):
+def forward_prop(X, params, layers, activations):
     """
     Executes the Forward Propogation step.
     
@@ -60,17 +60,19 @@ def forward_prop(input, params, layers, activations):
     layers -- Numer of hidden layers in the trained neural network
     activations -- Activation function for each layer
     """
-    A_prev = input
+    A_prev = X
     results = []
+    results.append({'A': A_prev})
     for l in range(1, layers+1):
         W = params['W'+str(l)]
         b = params['b'+str(l)]
         Z = np.dot(W, A_prev) + b
         if activations['layer'+str(l)] == 'relu':
-            A_prev = realu(Z)
+            A_prev = relu(Z)
         if activations['layer'+str(l)] == 'sigmoid':
             A_prev = sigmoid(Z)
-        results.append('A': A_prev)
+        cache = {'A': A_prev}
+    results.append(cache)
     output = results[-1]['A']
     return output
 
@@ -92,8 +94,11 @@ def predict(X, NN_parameters, trained_parameters):
     activations = NN_parameters['activations']
     output = forward_prop(X, trained_parameters, layers, activations)
     decision_boundry = np.vectorize(lambda x: 1 if x > 0.5 else 0)
-    Y_pred = decision_boundary(output)
+    Y_pred = decision_boundry(output)
     return Y_pred
+
+def score(Y, Y_pred):
+    return len(Y[Y_pred == Y]) / Y.shape[1]
 
 def print_mislabeled_images(classes, X, y, p):
     """
