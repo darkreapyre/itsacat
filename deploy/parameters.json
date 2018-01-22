@@ -13,5 +13,6 @@
         "layer3": 5,
         "layer4": 1
     },
+    "weight": 0.01,
     "learning_rate": 0.0075
 }
