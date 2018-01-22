@@ -80,11 +80,12 @@ def predict(X, NN_parameters, trained_parameters):
     """
     Applies the Forward Propogation step with optmized paramters to the input data.
     Compares the output to the labeled data to determine classification with a
-    threshold of 0.5.
+    decision boundary of 0.5.
     
     Arguments:
     X -- Input data of any shape
-    Y -- Labels of shape (1, no.examples)
+    NN_parameters -- Neural Network configuration
+    trained_parameters -- Numpy array of optmized weights and bias
     
     Returns:
     Y_pred -- The predicted label
@@ -97,19 +98,24 @@ def predict(X, NN_parameters, trained_parameters):
     Y_pred = decision_boundry(output)
     return Y_pred
 
-def score(Y, Y_pred):
-    return len(Y[Y_pred == Y]) / Y.shape[1]
-
-def print_mislabeled_images(classes, X, y, p):
+def print_mislabeled_images(parameters, params):
     """
     Plots images where predictions and truth were different.
-    X -- dataset
-    y -- true labels
-    p -- predictions
+    
+    Arguments:
+    NN_parameters -- Neural Network configuration
+    trained_parameters -- Numpy array of optmized weights and bias
     """
+    # Re-load testing dataset
+    X, y, classes = load_data()
+    # Pre-process Inputs
+    X = X.reshape(X.shape[0], -1).T
+    X = X / 255
+    # Run prediction
+    p = predict(X, parameters, params)
     a = p + y
     mislabeled_indices = np.asarray(np.where(a == 1))
-    plt.rcParams['figure.figsize'] = (40.0, 40.0) # set default size of plots
+    plt.rcParams['figure.figsize'] = (23.0, 23.0) # set default size of plots
     num_images = len(mislabeled_indices[0])
     for i in range(num_images):
         index = mislabeled_indices[1][i]
