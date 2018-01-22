@@ -12,6 +12,11 @@
 
 ## Deployment
 
+>**Note:** The demo is only functional in these *Availability Zones*:
+  - *us-west-2*
+  - *us-east-1*
+  - BLAH BLAH BLAH
+
 ```console
     Enter the AWS Region to use > "AWS REGION"
     Enter the S3 bucket to create > "UNIQUE S3 BUCKET"
