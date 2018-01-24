@@ -23,8 +23,11 @@ To deploy the environment, change to the *deploy* directory. An easy to use depl
     Enter the e-mail address to send training update > <<E-MAIL ADDRESS>>
 ```
 
+The script creates the an *S3* Bucket; copies the necessary *CloudFormation* templates to the Bucket; creates the *Lambda* deployment package and uploades it to the Bucket and lastly, it creates the CloudFormation *Stack*. 
+Once completed, the following message is displayed.
+
 ```shell
-    "Successfully created/updated stack - <Stack Name>"
+    "Successfully created/updated stack - <<Stack Name>>"
 ```
 
 **Confirm Subscription**
