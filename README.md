@@ -14,6 +14,8 @@
 
 >**Note:** The demo has only been tested in the *us-west-2* Region.
 
+To deploy the environment, change to the *deploy* directory. An easy to use deployment script has been created to automatically deploy the environment. Start the process by running `./deploy.sh`.
+
 ```console
     Enter the AWS Region to use > "AWS REGION"
     Enter the S3 bucket to create > "UNIQUE S3 BUCKET"
