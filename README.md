@@ -12,10 +12,7 @@
 
 ## Deployment
 
->**Note:** The demo is only functional in these *Availability Zones*:
-  - *us-west-2*
-  - *us-east-1*
-  - BLAH BLAH BLAH
+>**Note:** The demo has only been tested in the *us-west-2* Region.
 
 ```console
     Enter the AWS Region to use > "AWS REGION"
