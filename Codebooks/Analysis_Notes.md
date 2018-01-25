@@ -1,7 +1,7 @@
 
 # Trained Model Performance Analysis
 ## Overview
-After a model has been trained and before it can be leveraged in production, 
+After a model has been trained and before it can be leveraged in production, it must be tested. This testing process
 
 ## Data
 BLAH BLAH BLAH
