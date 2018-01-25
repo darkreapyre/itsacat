@@ -1,6 +1,6 @@
 
 # Trained Model Performance Analysis
-## Overview
+## Introduction
 After a model has been trained and before it can be leveraged in production, it must be tested. This testing process typically takes the form of:
 
 1. Checking how well the moodel performed duing the training porocess:  
@@ -10,20 +10,26 @@ After a model has been trained and before it can be leveraged in production, it 
     been successful.
 2. Testing how well the model performs against simiular data:  
     A good portice in machine learning is to create a subset of the training data keep it separate for testing.
-    This is typically refered to as a *hold-out*, *validation* or test set. By testing the model against this data,
-    one can simlate 
+    This is typically refered to as a *hold-out*, *validation* or *test* set. By testing the model against this data, 
+    further insight on how the model will perform in a production scenario, can be derived.
 3. Testing the model against previously unseen data:  
-    blah blah blha
+    Testing the model against an image that is neither part of the training data or the testing will provide realistic proof
+    of it's prformance in production.
 
-## Data
-BLAH BLAH BLAH
+The following notebook demonstartes how the final model performs against the above testing methodolody.
 
+---
+## Analysis Data
 ### Training Output Files
-BLAH BLAH BLAH
-- Results
-- Model Configuration
-- Optmized/Trained Parameters
+Before the analysis can begin, the appropriate data from the training process needs to be collected from the S3 bucket that
+was created during the deployment. These are:
+- **Results:** After training is complete the **SNN* outputs the training error for each epoch to a JSON (`results.json`)file.
+- **Model Configuration:** The network model parameters file (`parameters.json`).
+- **Optmized/Trained Parameters:** The final **Weights** and **Bias** parameters that have been optmized by the **Gradient Descent**
+    process.
 
+The following code cells extracts the above data sets from S3. To start, please enter the name of the S3 Bucket created during the
+deployment process as well as the AWS Region used.
 
 ```python
 # Enter the S3 Bucket Name and Region used during deployment
@@ -58,8 +64,7 @@ with h5py.File('/tmp/params.h5', 'r') as h5file:
 ```
 
 ### Test Data
-BLAH BLAH BLAH Load Data
-
+The data used for testing and validation is exatly the same as the data used for traing save for the fact that there are less examples, $50$ as opposed to $209$.
 
 ```python
 # Load test dataset
@@ -67,8 +72,9 @@ test_set_x_orig, Y, classes = load_data()
 num_px = test_set_x_orig.shape[1]
 ```
 
-BLAH BLAH BLAH Pre-process Data
-
+Just as with the training set, the test set images need to be pre-processed as the model is expecting a numpy array
+of shape (no. pixels $\times$ no. pixels $\times$ depth, data set size). Additionally the model also expects the
+testing labels to be a vector of shape (1, data set size).
 
 ```python
 # Reshape testing data to a matrix of volum vectors
@@ -78,10 +84,10 @@ test_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[0], -1).T
 X = test_x_flatten / 255
 ```
 
+---
 ## Results Analysis
-### Overview
-BLAH BLAH BLAH
-
+Now that all of the relevent data has been collected, a similar exercise to the $10$ epoch sample used in the 
+[codebook](./Codebook.ipynb) can be done on the final results.
 
 ```python
 # Training Results Overview
@@ -113,8 +119,6 @@ plt.show;
     Final Cost: 0.0032063105530472573
 
 
-
-![png](output_8_1.png)
 
 
 ### Accuracy Score
