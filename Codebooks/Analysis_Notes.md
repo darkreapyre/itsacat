@@ -1,7 +1,12 @@
 
 # Trained Model Performance Analysis
 ## Overview
-After a model has been trained and before it can be leveraged in production, it must be tested. This testing process
+After a model has been trained and before it can be leveraged in production, it must be tested. This testing process typically takes the form of:
+
+1. Checking how well ther moodel performs duing the training porocess:
+    
+2. Testing how well the model performs against simiular data.
+3. Testing the model against previously unseen data.
 
 ## Data
 BLAH BLAH BLAH
