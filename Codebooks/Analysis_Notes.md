@@ -3,9 +3,15 @@
 ## Overview
 After a model has been trained and before it can be leveraged in production, it must be tested. This testing process typically takes the form of:
 
-1. Checking how well ther moodel performs duing the training porocess:
-    
-2. Testing how well the model performs against simiular data.
+1. Checking how well the moodel performed duing the training porocess:
+    A good indication that the model performs well on the training data is to verify that the overall
+    *Training Error* (Cost Function) decreases after every iteration of the forward propogation process.
+    If after the final epoch, the error is less than $0.01$, this generally shows that the training has 
+    been successful.
+2. Testing how well the model performs against simiular data:
+    A good portice in machine learning is to create a subset of the training data keep it separate for testing.
+    This is typically refered to as a *hold-out*, *validation* or test set. By testing the model against this data,
+    one can simlate 
 3. Testing the model against previously unseen data.
 
 ## Data
