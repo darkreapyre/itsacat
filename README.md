@@ -109,11 +109,12 @@ The **Codebook** provides an overview of the the various Python Librarties, Help
 To train the full classificaiton model on the *SNN* framework. Simply upload the `datasets.h5` file found in the `datasets`directory to the `traioning_iput` folder folder that has already been created by the deployment process.
 >**Note:** A pre-configured `parameters.json` file has already been created. To change the Neural Network configuration parameters, before running the training process, change this file and upload it to the `training_iput` folder of the S3 Buvket before uploading the data set.
 
-Once the data file has been uploaded, an S3 Buvket Event will automatically trigger the training process. Should trigger process be successful, an automatic message will be sent to the e-mail address confgured during deployment. The message should look as follows:
+Once the data file has been uploaded, an S3 Bucket Event will automatically trigger the training process. Should trigger process be successful, an automatic message will be sent to the e-mail address confgured during deployment. The message should look as follows:
 ```text
     Training update!
     Cost after epoch 0 = 0.7012303687667679
 ```
+In-depth insight to the the training process can be viewed through the **CloudWatch** console.
 
 If a message is not recived after *5 minutes*, refer to the **Troubleshooting** section.
 
@@ -128,6 +129,7 @@ Work through the various code cells to see:
 >**Note:** Ensure to add the name of the S3 Bucket and AWS Region used during deployment to get the correct results files created during the training process.
 
 ## Troubleshooting
+Since the framework launches a significant amoun to Asynchronous Lambda functions without en pre-warming, the **CloudWatch** logs may show thge following error:
 
 ```python
     list index out of range: IndexError
@@ -138,6 +140,8 @@ Work through the various code cells to see:
     key_list.append(result[0])
     IndexError: list index out of range
 ```
+
+To address this, simpkly delete the data set from the S3 bicket and re-upload it to re-launch the traning process.
 
 ## Cleanup
 
