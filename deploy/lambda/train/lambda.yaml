@@ -37,13 +37,13 @@ Parameters:
 Resources:
   SNSTopic:
     Type: 'AWS::SNS::Topic'
-    Description: Publish Alerts and Training Status
+    Description: Publish Errors and Neural Network Training Status
     Properties:
-      DisplayName: Lambda Neural Network Status Messages
+      DisplayName: Serverless Neural Network Status Message
       Subscription:
         - Endpoint: !Ref TopicEmail
           Protocol: email
-      TopicName: !Sub ${EnvironmentName}-LNN-SNS
+      TopicName: !Sub ${EnvironmentName}-SNN-SNS
 
   LaunchLambda:
     Type: 'AWS::Lambda::Function'

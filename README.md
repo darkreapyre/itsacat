@@ -13,11 +13,9 @@
 ``` 
 
 ## Deployment
-
 >**Note:** The demo has only been tested in the *us-west-2* Region.
 
-To deploy the environment, change to the *deploy* directory. An easy to use deployment script has been created to automatically deploy the environment. Start the process by running `./deploy.sh`. You will be prompted for the following information:
-
+1. To deploy the environment, change to the *deploy* directory. An easy to use deployment script has been created to automatically deploy the environment. Start the process by running `./deploy.sh`. You will be prompted for the following information:
 ```console
     Enter the AWS Region to use > <<AWS REGION>>
     Enter the S3 bucket to create > <<UNIQUE S3 BUCKET>>
@@ -25,36 +23,37 @@ To deploy the environment, change to the *deploy* directory. An easy to use depl
     Enter the e-mail address to send training update > <<E-MAIL ADDRESS>>
 ```
 
-The script creates the an *S3* Bucket; copies the necessary *CloudFormation* templates to the Bucket; creates the *Lambda* deployment package and uploades it to the Bucket and lastly, it creates the CloudFormation *Stack*. 
-Once completed, the following message is displayed.
+2. The `deploy.sh` script creates the an *S3* Bucket; copies the necessary *CloudFormation* templates to the Bucket; creates the *Lambda* deployment package and uploades it to the Bucket and lastly, it creates the CloudFormation *Stack*. Once completed, the following message is displayed:
 
-```shell
+```console
     "Successfully created/updated stack - <<Stack Name>>"
 ```
 
-**Confirm Subscription**
+>**Note:** During the deployment, and e-mail will be sent to the address specified in the `deploy.sh` script. Make sure to confirm the subscription to the SNS Topic.
 
 ## Integration with SakeMaker Notebook Instance
+Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazon.com/sagemaker/) into the stack to start reviewing the Demo content by using the following steps:
 
-1. Create notebook instance
-2. Notebook instance settings
-    - Notebook instance name
-    - Notebook instance type -> ml.t2.medium
-    - IAM Role -> Create new role
-    - Specific S3 Bucket -> "UNIQUE BUCKET NAME" -> Create Role
-    - VPC -> "UNIQUE STACK NAME"
-    - Subnet -> "Private subnet"
-    - Security group(s) -> HostSecurityGroup
-    - Create notebook instance
-3. Status -> Pending
-4. Configure Service Access role
-    - IAM -> Role -> "AmazonSageMaker-ExecutionRole-..."
-    - Policy name -> "AmazonSageMaker-ExecutionPolicy-..." -> Edit policy
-    - Visual editor tab -> Add additional permissions
-        - Service -> Choose a service -> ElastiCache
-        - Action -> Select and action -> All ElastiCache actions (elasticache:*) 
-        - Review Policy
-        - Save changes
+1. Open the SageMaker [console](https://console.aws.amazon.com/sagemaker).
+2. Create notebook instance.
+3. Notebook instance settings.
+    - Notebook instance name.
+    - Notebook instance type -> ml.t2.medium.
+    - IAM Role -> Create new role.
+    - Specific S3 Bucket -> <<UNIQUE BUCKET NAME>> -> Create Role.
+    - VPC -> <<UNIQUE STACK NAME>> .
+    - Subnet -> select any of the subnets marked "Private".
+    - Security group(s) -> HostSecurityGroup.
+    - Create notebook instance.
+3. You should see Status -> Pending.
+4. Configure Service Access role.
+    - IAM Console -> Role -> "AmazonSageMaker-ExecutionRole-...".
+    - Policy name -> "AmazonSageMaker-ExecutionPolicy-..." -> Edit policy.
+    - Visual editor tab -> Add additional permissions.
+        - Service -> Choose a service -> ElastiCache.
+        - Action -> Select and action -> All ElastiCache actions (elasticache:*) .
+        - Review Policy.
+        - Save changes.
     - The final Policy should look similar to this:
     ```json
         {
@@ -80,26 +79,33 @@ Once completed, the following message is displayed.
             ]
         }
     ```
-5. Actions -> Open
-6. Configure Libraries
-    - Conda -> Conda environments -> python3
-    - Available packages -> Search -> "redis"
+5. Return to the SageMaker console and confirm the Notebook instance is created. Uner "Actions" -> Select "Open".
+6. After the Jupyter Interface has openned, Configure the Python Libraries:
+    - Select the "Conda" tab -> under "Conda environments" -> select "python3".
+    - Under "Available packages" -> Click the "Search" -> enter "redis". The following two "redis" packages should be availble. 
         - redis
         - redis-py
-    - "Right Arrow" -> Install ??(pop-up)??
-7. Download Code
-    - Files Tab -> New -> Terminal
-    - ```shell
+    - Select both packages and click the "->" button to install the packages.
+    - Confirm to "Install" on the pop-up.
+7. Clone the "itsacat" Code.
+    - Under the "Files" tab -> Click "New" -> "Terminal".
+    - Under the Shell run the following commands:
+    ```shell
         $ cd SageMaker
         $ git clone https://github.com/darkreapyre/itsacat
         $ exit
     ```
-    - Files -> itsacat -> artifacts -> Codebook.ipynb
+    - Go back to the "Files" tab -> click "itsacat" -> click "artifacts" -> select `Introduction.ipynb`
 
+## Jupyter Notebooks
+### Introduction
+The **Introduction** provides an overview of the *Architecture* and how the *Neural Network* is implemented.
 
-## Codebook Overview
+### Codebook
+The **Codebook** provides an overview of the the various Python Librarties, Helper Functions and the core code that is integrated into each of the Lambda Functions. It also provides a mock up of a *2-Layer* implementation of the Neural Network using the code within the Notebook to get an understanding of the full training process will be executed.
 
 ## Training the Classifier
+To train the full classificaiton model and execute the *SNN* environment 
 
 - Sample e-mail:
 ```text
