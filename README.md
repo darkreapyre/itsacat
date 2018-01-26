@@ -99,10 +99,10 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
     - Go back to the "Files" tab -> click "itsacat" -> click "artifacts" -> select `Introduction.ipynb`
 
 ## Jupyter Notebooks
-### Introduction
+### `Introduction` Notebook
 The **Introduction** provides an overview of the *Architecture* and how the *Neural Network* is implemented.
 
-### Codebook
+### `Codebook` Notebook
 The **Codebook** provides an overview of the the various Python Librarties, Helper Functions and the core code that is integrated into each of the Lambda Functions. It also provides a mock up of a *2-Layer* implementation of the Neural Network using the code within the Notebook to get an understanding of the full training process will be executed.
 
 ## Training the Classifier
