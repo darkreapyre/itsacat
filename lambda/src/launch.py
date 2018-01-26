@@ -311,16 +311,20 @@ def initialize_data(endpoint, parameters):
     m = train_set_x.shape[1]
     data_keys['m'] = to_cache(endpoint, obj=m, name='m')
 
-    # Multiple layer weight and bias initialization
+    # Multiple layer weight and bias initialization using Xavier Initialization for the ReLU neurons
     for l in range(1, parameters['layers']+1):
         if l == 1:
-            #W = np.random.randn(parameters['neurons']['layer'+str(l)], train_set_x.shape[0]) / np.sqrt(train_set_x.shape[0])
+            # Standard Weight initialization
             W = np.random.randn(parameters['neurons']['layer'+str(l)], train_set_x.shape[0]) * np.sqrt((2.0 / train_set_x.shape[0]))
         else:
+            # Standard Weight initialization
+            #W = np.random.randn(parameters['neurons']['layer'+str(l)], parameters['neurons']['layer'+str(l-1)]) / np.sqrt(parameters['neurons']['layer'+str(l-1)])
             if parameters['activations']['layer'+str(l)] == 'sigmoid':
                 W = np.random.randn(parameters['neurons']['layer'+str(l)], parameters['neurons']['layer'+str(l-1)]) / np.sqrt(parameters['neurons']['layer'+str(l-1)])
             else:
+                # Xavier Weight initialization for a ReLU neuron
                 W = np.random.randn(parameters['neurons']['layer'+str(l)], parameters['neurons']['layer'+str(l-1)]) * np.sqrt((2.0 / parameters['neurons']['layer'+str(l-1)]))
+        # Standard Bias initialization
         b = np.zeros((parameters['neurons']['layer'+str(l)], 1))
         # Store the initial weights and bias in ElastiCache
         data_keys['W'+str(l)] = to_cache(endpoint=endpoint, obj=W, name='W'+str(l))

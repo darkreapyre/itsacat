@@ -497,10 +497,8 @@ def lambda_handler(event, context):
             Y = from_cache(endpoint=endpoint, key=parameters['data_keys']['Y'])
             m = from_cache(endpoint=endpoint, key=parameters['data_keys']['m'])
             
-            # Calculate the Cost
-            #cost = -1 / m * np.sum(np.multiply(Y, np.log(A)) + np.multiply((1 - Y), np.log(1 - A))) #from ste-by-step
+            # Calculate the Cross-entropy Cost
             cost = (1. / m) * (-np.dot(Y, np.log(A).T) - np.dot(1 - Y, np.log(1 - A).T)) #from application
-            #cost = (-1 / m) * np.sum(Y * (np.log(A)) + ((1 - Y) * np.log(1 - A))) #from S-Layer
             cost = np.squeeze(cost)
             assert(cost.shape == ())
 
