@@ -100,7 +100,7 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
 
 ## Jupyter Notebooks
 ### `Introduction.ipynb` Notebook
-The **Introduction** provides an overview of the *Architecture* and how the *Neural Network* is implemented.
+The **Introduction** provides an overview of the *Architecture*, *Why* and *How* the *Serverless Neural Network* is implemented.
 
 ### `Codebook.ipynb` Notebook
 The **Codebook** provides an overview of the various *Python Libraries*, *Helper Functions* and the *Handler* functions that is integrated into each of the Lambda Functions. It also provides a mockup of a *2-Layer* implementation of the Neural Network using the code within the Notebook to get an understanding of the full training process will be executed.
