@@ -92,7 +92,7 @@ Once completed, the following message is displayed.
         $ git clone https://github.com/darkreapyre/itsacat
         $ exit
     ```
-    - Files -> itsacat -> Codebooks -> Codebook.ipynb
+    - Files -> itsacat -> artifacts -> Codebook.ipynb
 
 
 ## Codebook Overview
