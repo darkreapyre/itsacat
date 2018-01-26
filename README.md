@@ -15,7 +15,8 @@
 ## Deployment
 >**Note:** The demo has only been tested in the *us-west-2* Region.
 
-1. To deploy the environment, change to the *deploy* directory. An easy to use deployment script has been created to automatically deploy the environment. Start the process by running `./deploy.sh`. You will be prompted for the following information:
+2. Make any changes to the Neural Network confguraiton parameters file (`parameters.json`) before runing the the deployment.
+2. To deploy the environment, change to the *deploy* directory. An easy to use deployment script has been created to automatically deploy the environment. Start the process by running `./deploy.sh`. You will be prompted for the following information:
 ```console
     Enter the AWS Region to use > <<AWS REGION>>
     Enter the S3 bucket to create > <<UNIQUE S3 BUCKET>>
@@ -23,7 +24,7 @@
     Enter the e-mail address to send training update > <<E-MAIL ADDRESS>>
 ```
 
-2. The `deploy.sh` script creates the an *S3* Bucket; copies the necessary *CloudFormation* templates to the Bucket; creates the *Lambda* deployment package and uploades it to the Bucket and lastly, it creates the CloudFormation *Stack*. Once completed, the following message is displayed:
+3. The `deploy.sh` script creates the an *S3* Bucket; copies the necessary *CloudFormation* templates to the Bucket; creates the *Lambda* deployment package and uploades it to the Bucket and lastly, it creates the CloudFormation *Stack*. Once completed, the following message is displayed:
 
 ```console
     "Successfully created/updated stack - <<Stack Name>>"
@@ -105,15 +106,26 @@ The **Introduction** provides an overview of the *Architecture* and how the *Neu
 The **Codebook** provides an overview of the the various Python Librarties, Helper Functions and the core code that is integrated into each of the Lambda Functions. It also provides a mock up of a *2-Layer* implementation of the Neural Network using the code within the Notebook to get an understanding of the full training process will be executed.
 
 ## Training the Classifier
-To train the full classificaiton model and execute the *SNN* environment 
+To train the full classificaiton model on the *SNN* framework. Simply upload the `datasets.h5` file found in the `datasets`directory to the `traioning_iput` folder folder that has already been created by the deployment process.
+>**Note:** A pre-configured `parameters.json` file has already been created. To change the Neural Network configuration parameters, before running the training process, change this file and upload it to the `training_iput` folder of the S3 Buvket before uploading the data set.
 
-- Sample e-mail:
+Once the data file has been uploaded, an S3 Buvket Event will automatically trigger the training process. Should trigger process be successful, an automatic message will be sent to the e-mail address confgured during deployment. The message should look as follows:
 ```text
     Training update!
     Cost after epoch 0 = 0.7012303687667679
 ```
 
+If a message is not recived after *5 minutes*, refer to the **Troubleshooting** section.
+
 ## Analyzing the Results
+Once the training porocess has successfully completed, an e-mail will be sent to the address configured during the deployment. To analyse the results fo the testing and to determine if the trained model is production-worthy, using the same *SageMaker* instance used for the *Codebook*, navigate to the `artifacts` directory and launch the `Analysis.ipynb` notebook.
+
+Work through the various code cells to see:
+1. Results fo the training.
+2. How well the model performs against the **Test** dataset.
+3. How well the model performs against new images.
+
+>**Note:** Ensure to add the name of the S3 Bucket and AWS Region used during deployment to get the correct results files created during the training process.
 
 ## Troubleshooting
 
