@@ -15,7 +15,7 @@
 ## Deployment
 >**Note:** The demo has only been tested in the *us-west-2* Region.
 
-2. Make any changes to the Neural Network confguraiton parameters file (`parameters.json`) before runing the the deployment.
+2. Make any changes to the Neural Network configuraiton parameters file (`parameters.json`) before running the deployment.
 2. To deploy the environment, change to the *deploy* directory. An easy to use deployment script has been created to automatically deploy the environment. Start the process by running `./deploy.sh`. You will be prompted for the following information:
 ```console
     Enter the AWS Region to use > <<AWS REGION>>
@@ -24,7 +24,7 @@
     Enter the e-mail address to send training update > <<E-MAIL ADDRESS>>
 ```
 
-3. The `deploy.sh` script creates the an *S3* Bucket; copies the necessary *CloudFormation* templates to the Bucket; creates the *Lambda* deployment package and uploades it to the Bucket and lastly, it creates the CloudFormation *Stack*. Once completed, the following message is displayed:
+3. The `deploy.sh` script creates the an *S3* Bucket; copies the necessary *CloudFormation* templates to the Bucket; creates the *Lambda* deployment package and uploads it to the Bucket and lastly, it creates the CloudFormation *Stack*. Once completed, the following message is displayed:
 
 ```console
     "Successfully created/updated stack - <<Stack Name>>"
@@ -32,7 +32,7 @@
 
 >**Note:** During the deployment, and e-mail will be sent to the address specified in the `deploy.sh` script. Make sure to confirm the subscription to the SNS Topic.
 
-## Integration with SakeMaker Notebook Instance
+## Integration with SageMaker Notebook Instance
 Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazon.com/sagemaker/) into the stack to start reviewing the Demo content by using the following steps:
 
 1. Open the SageMaker [console](https://console.aws.amazon.com/sagemaker).
@@ -80,10 +80,10 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
             ]
         }
     ```
-5. Return to the SageMaker console and confirm the Notebook instance is created. Uner "Actions" -> Select "Open".
-6. After the Jupyter Interface has openned, Configure the Python Libraries:
+5. Return to the SageMaker console and confirm the Notebook instance is created. Under "Actions" -> Select "Open".
+6. After the Jupyter Interface has opened, Configure the Python Libraries:
     - Select the "Conda" tab -> under "Conda environments" -> select "python3".
-    - Under "Available packages" -> Click the "Search" -> enter "redis". The following two "redis" packages should be availble. 
+    - Under "Available packages" -> Click the "Search" -> enter "redis". The following two "redis" packages should be available. 
         - redis
         - redis-py
     - Select both packages and click the "->" button to install the packages.
@@ -99,27 +99,27 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
     - Go back to the "Files" tab -> click "itsacat" -> click "artifacts" -> select `Introduction.ipynb`
 
 ## Jupyter Notebooks
-### `Introduction` Notebook
+### `Introduction.ipynb` Notebook
 The **Introduction** provides an overview of the *Architecture* and how the *Neural Network* is implemented.
 
-### `Codebook` Notebook
-The **Codebook** provides an overview of the the various Python Librarties, Helper Functions and the core code that is integrated into each of the Lambda Functions. It also provides a mock up of a *2-Layer* implementation of the Neural Network using the code within the Notebook to get an understanding of the full training process will be executed.
+### `Codebook.ipynb` Notebook
+The **Codebook** provides an overview of the various *Python Libraries*, *Helper Functions* and the *Handler* functions that is integrated into each of the Lambda Functions. It also provides a mockup of a *2-Layer* implementation of the Neural Network using the code within the Notebook to get an understanding of the full training process will be executed.
 
 ## Training the Classifier
-To train the full classificaiton model on the *SNN* framework. Simply upload the `datasets.h5` file found in the `datasets`directory to the `traioning_iput` folder folder that has already been created by the deployment process.
->**Note:** A pre-configured `parameters.json` file has already been created. To change the Neural Network configuration parameters, before running the training process, change this file and upload it to the `training_iput` folder of the S3 Buvket before uploading the data set.
+To train the full classification model on the *SNN* framework, simply upload the `datasets.h5` file found in the `datasets` directory to the `training_iput` folder that has already been created by the deployment process.
+>**Note:** A pre-configured `parameters.json` file has already been created. To change the Neural Network configuration parameters, before running the training process, change this file and upload it to the `training_iput` folder of the S3 Bucket before uploading the data set.
 
-Once the data file has been uploaded, an S3 Bucket Event will automatically trigger the training process. Should trigger process be successful, an automatic message will be sent to the e-mail address confgured during deployment. The message should look as follows:
+Once the data file has been uploaded, an S3 Bucket Event will automatically trigger the training process. Should trigger process be successful, an automatic message will be sent to the e-mail address configured during deployment. The message should look as follows:
 ```text
     Training update!
     Cost after epoch 0 = 0.7012303687667679
 ```
-In-depth insight to the the training process can be viewed through the **CloudWatch** console.
+In-depth insight to the training process can be viewed through the **CloudWatch** console.
 
-If a message is not recived after *5 minutes*, refer to the **Troubleshooting** section.
+If a message is not received after *5 minutes*, refer to the **Troubleshooting** section.
 
 ## Analyzing the Results
-Once the training porocess has successfully completed, an e-mail will be sent to the address configured during the deployment. To analyse the results fo the testing and to determine if the trained model is production-worthy, using the same *SageMaker* instance used for the *Codebook*, navigate to the `artifacts` directory and launch the `Analysis.ipynb` notebook.
+Once the training process has successfully completed, an e-mail will be sent to the address configured during the deployment. To analyze the results of the testing and to determine if the trained model is production-worthy, using the same *SageMaker* instance used for the *Codebook*, navigate to the `artifacts` directory and launch the `Analysis.ipynb` notebook.
 
 Work through the various code cells to see:
 1. Results fo the training.
@@ -129,7 +129,7 @@ Work through the various code cells to see:
 >**Note:** Ensure to add the name of the S3 Bucket and AWS Region used during deployment to get the correct results files created during the training process.
 
 ## Troubleshooting
-Since the framework launches a significant amoun to Asynchronous Lambda functions without en pre-warming, the **CloudWatch** logs may show thge following error:
+Since the framework launches a significant amount to Asynchronous Lambda functions without any pre-warming, the **CloudWatch** logs may show the following error:
 
 ```python
     list index out of range: IndexError
@@ -141,24 +141,24 @@ Since the framework launches a significant amoun to Asynchronous Lambda function
     IndexError: list index out of range
 ```
 
-To address this, simpkly delete the data set from the S3 bicket and re-upload it to re-launch the traning process.
+To address this, simply delete the data set from the S3 Bucket and re-upload it to re-launch the training process.
 
 ## Cleanup
 
-1. Delete the CloudFormnation Stack
-    - CloudFormation Service console
+1. Delete the CloudFormnation Stack.
+    - Open the CloudFormation Service console.
     - Select the "bottom" stack in the **Stack Name** column.
-    - Actoions -> Delete Stack -> "Yes, Delete"
-2. Delete DynamoDB Tables
-    - DynamoDB Service console
-    - Select "Tables" in the navigation panel
-    - Check *NeuronLambda* -> Delete table -> Delete
+    - Actions -> Delete Stack -> "Yes, Delete".
+2. Delete DynamoDB Tables.
+    - Open DynamoDB Service console.
+    - Select "Tables" in the navigation panel.
+    - Check *NeuronLambda* -> Delete table -> Delete.
     - Repeat the above process for the *TrainerLambda* table.
-3. CloudWatch Logs
-    - CloudWatch Service console
-    - Select "Logs" in the navigsation panel
-    - Check */aws/lambda/LaunchLambda* -> Actions -> Delete log group -> Yes, Delete
+3. Delete the CloudWatch Logs.
+    - Open the CloudWatch Service console.
+    - Select "Logs" in the navigation panel.
+    - Check */aws/lambda/LaunchLambda* -> Actions -> Delete log group -> Yes, Delete.
     - Repeat the above process for */aws/lambda/NeuronLambda*, */aws/lambda/S3TriggerLambda*, and */aws/lambda/S3TriggerLambda*.
-4. S3 Bucket
-    - Amazon S3 Service console
-    - Highlite the bucket -> Delete bucket
+4. Delete the S3 Bucket.
+    - Open the S3 Service console.
+    - Highlite the bucket -> Delete bucket.
