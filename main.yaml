@@ -8,14 +8,14 @@ Parameters:
 
   GitHubRepo:
     Type: String
-    Default: LNN
+    Default: itsacat
     Description: The repo name of the Prediction API.
     AllowedPattern: "[A-Za-z0-9_.-]*"
     MaxLength: 50
 
   GitHubBranch:
     Type: String
-    Default: 1.0
+    Default: Demo-1
     Description: The branch of the repo to continuously deploy.
 
   GitHubToken:
