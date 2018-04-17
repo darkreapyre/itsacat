@@ -11,9 +11,9 @@
     Enter GitHubToken > <<GitHub Token>>
     Enter the e-mail address to send training update > <<E-MAIL ADDRESS>>
 ```
->**Note:** For more information on creating a GitHub [Token](https://github.com/settings/tokens).
+>**Note:** For more information on creating a [GitHub Token](https://github.com/settings/tokens).
 
-3. The `deploy.sh` script creates the an *S3* Bucket; copies the necessary *CloudFormation* templates to the Bucket; creates the *Lambda* deployment package and uploads it to the Bucket and lastly, it creates the CloudFormation *Stack*. Once completed, the following message is displayed:
+3. The `deploy.sh` script creates the an *S3* Bucket; copies the necessary CloudFormation templates to the Bucket; creates the Lambda deployment package and uploads it to the Bucket and lastly, it creates the CloudFormation Stack. Once completed, the following message is displayed:
 ```console
     "Successfully created/updated stack - <<Stack Name>>"
 ```
