@@ -1,9 +1,8 @@
 # Demo 1 - Serverless Neural Network for Image Classification
-<!-- Note to Self: Change the picture and text below to reflect when adding to CodeCommit Repository -->
-![alt text](https://github.com/darkreapyre/LNN/blob/1.0/artifacts/images/Prediction_Architecture-2.png "Architecture")
+![alt text](https://github.com/darkreapyre/itsacat/blob/Demo-1/Notebooks/images/Architecture.png "Architecture")
 
 ## Deployment
-1. Make any changes to the Neural Network configuraiton parameters file (`parameters.json`) before running the deployment.
+1. Make any changes to the Neural Network configuraiton parameters file (`parameters.json`) before running the deployment e.g. Number of Layers, Neurons per Layer etc.
 2. To deploy the environment, an easy to use deployment script has been created to automatically deploy the environment. Start the process by running `bin/deploy`. You will be prompted for the following information:
 ```console
     Enter the S3 bucket to create > <<UNIQUE S3 BUCKET>>
