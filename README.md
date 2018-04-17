@@ -17,7 +17,7 @@
 ```console
     "Successfully created/updated stack - <<Stack Name>>"
 ```
->**Note:** During the deployment, and e-mail will be sent to the specified address. Make sure to confirm the subscription to the SNS Topic.
+>**Note:** During the deployment, and e-mail will be sent to the specified address. __Make sure to confirm the subscription to the SNS Topic!__
 
 ## Integration with SageMaker Notebook Instance
 Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazon.com/sagemaker/) into the stack to start reviewing the Demo content by using the following steps:
