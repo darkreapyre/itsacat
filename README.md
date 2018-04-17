@@ -27,16 +27,16 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
     - Notebook instance name.
     - Notebook instance type -> ml.t2.medium.
     - IAM Role -> Create new role.
-    - Specific S3 Bucket -> "UNIQUE BUCKET NAME" -> Create Role.
-    - VPC -> "UNIQUE STACK NAME" .
-    - Subnet -> Select the subnet marked "Private Subnet (AZ1)".
+        - Specific S3 Bucket -> `<<UNIQUE BUCKET NAME>>` -> Create Role.
+    - VPC -> `<<UNIQUE STACK NAME>>`.
+    - Subnet -> Select the subnet marked `<<Private Subnet (AZ1)>>`.
     - Security group(s) -> ComputeSecurityGroup.
     - Direct Internet Access -> Enable.
     - Create notebook instance.
 3. You should see Status -> Pending.
 4. Configure Service Access role.
-    - IAM Console -> Role -> "AmazonSageMaker-ExecutionRole-...".
-    - Policy name -> "AmazonSageMaker-ExecutionPolicy-..." -> Edit policy.
+    - IAM Console -> Role -> `<<AmazonSageMaker-ExecutionRole-...>>`.
+    - Policy name -> `<<AmazonSageMaker-ExecutionPolicy-...>>` -> Edit policy.
     - Visual editor tab -> Add additional permissions.
         - Service -> Choose a service -> ElastiCache.
         - Action -> Select and action
@@ -46,36 +46,36 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
         - Save changes.
     - The final Policy should look similar to this:
     ```json
-        {
-            "Version": "2012-10-17",
-            "Statement": [
-                {
-                    "Sid": "VisualEditor0",
-                    "Effect": "Allow",
-                    "Action": "s3:ListBucket",
-                    "Resource": "arn:aws:s3:::<<UNIQUE BUCKET NAME>>"
-                },
-                {
-                    "Sid": "VisualEditor1",
-                    "Effect": "Allow",
-                    "Action": [
-                        "s3:PutObject",
-                        "s3:GetObject",
-                        "s3:DeleteObject"
-                    ],
-                    "Resource": "arn:aws:s3:::<<UNIQUE BUCKET NAME>>/*"
-                },
-                {
-                    "Sid": "VisualEditor2",
-                    "Effect": "Allow",
-                    "Action": [
-                        "dynamodb:*",
-                        "elasticache:*"
-                    ],
-                    "Resource": "*"
-                }
-            ]
-        }
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "VisualEditor0",
+                "Effect": "Allow",
+                "Action": "s3:ListBucket",
+                "Resource": "arn:aws:s3:::itsacat-demo-1"
+            },
+            {
+                "Sid": "VisualEditor1",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:PutObject",
+                    "s3:GetObject",
+                    "s3:DeleteObject"
+                ],
+                "Resource": "arn:aws:s3:::itsacat-demo-1/*"
+            },
+            {
+                "Sid": "VisualEditor2",
+                "Effect": "Allow",
+                "Action": [
+                    "dynamodb:*",
+                    "elasticache:*"
+                ],
+                "Resource": "*"
+            }
+        ]
+    }
     ```
 5. Return to the SageMaker console and confirm the Notebook instance is created. Under "Actions" -> Select "Open".
 6. After the Jupyter Interface has opened, Configure the Python Libraries:
@@ -91,11 +91,12 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
     - Under the Shell run the following commands:
     ```shell
         $ cd SageMaker
-        $ git clone https://github.com/<<Repository Name>>/LNN
-        $ git checkout 1.0
+        $ git clone https://github.com/<<GitHub User Name>>/itsacat
+        $ cd itsacat
+        $ git checkout Demo-1
         $ exit
     ```
-    - Go back to the "Files" tab -> click "`<<Repository Nane>>`" -> click "Notebooks" -> select `Introduction.ipynb`
+    - Go back to the "Files" tab -> click "itsacat" -> click "Notebooks" -> select `Introduction.ipynb`
 
 ## Demo Process Flow
 To follow the Machine Learning Pipeline process flow the four steps listed below:
@@ -115,7 +116,7 @@ The **Codebook** provides an overview of the various *Python Libraries*, *Helper
 >**Note:** In order to avoid any conflict with the Parameter Server (ElastiCache) and to avoid unnecessary serivce charges, a good practice is to Stop the SageMaker Notebook Instance before proceeding to the next step.
 
 ### Step 2. Training the Classifier
-To train the full classification model on the *SNN* framework, simply upload the `datasets.h5` file found in the `artifacts\datasets` directory to the `training_iput` folder of the S3 bucket that has already been created by the deployment process.
+To train the full classification model on the *SNN* framework, simply upload the `datasets.h5` file found in the `Notebooks\datasets` directory to the `training_iput` folder of the S3 bucket that has already been created by the deployment process.
 >**Note:** A pre-configured `parameters.json` file has already been created. To change the Neural Network configuration parameters, before running the training process, change this file and upload it to the `training_input` folder of the S3 Bucket before uploading the data set.
 
 Once the data file has been uploaded, an S3 Event will automatically trigger the training process, and in-depth insight to the training process can be viewed through the **CloudWatch** console. When the model training is complete (typically after 22 hours), the final optimized parameters will be copied to the `prediction_input` folder of the S3 bucket. This will trigger the production deployment pipeline and a message will be sent to review the Prediction API in the QA/Staging environment.
@@ -133,8 +134,8 @@ Work through the various code cells to see:
 
 ### Step 4. Prediction API
 The deployment pipeline for the production application is triggered at two separate stages within the Demo Process Flow:
-- After executing the `Codebook.ipynb` in [Step 1.](#step-1-jupyter-notebooks), the parameters are written to the `predict_input` folder of the S3 bucket. Since this is a Source for CodePipeline to trigger the deployment. At this stage, since the parameters have only been trained for 10 iterations, they are not fully optmized, so the Prediction API will not fully predict a "cat" picture.
-- After the model has been optimally trained in [Step 2.](#step-2-training-the-classifier), the parameters once again written to the `predict_input` folder fo the S3 bucket and thius the deployment pipeline is triggered. Since the model has been optmially trained, the Prediction API should fully predict a "cat" picture.
+1. After executing the `Codebook.ipynb` in [Step 1.](#step-1-jupyter-notebooks), the parameters from the 10 Epoch training example are written to the `predict_input` folder of the S3 bucket. Since this is a "Source" for CodePipeline to trigger the deployment, the CI/CD portion of the DevOps Pipeline is started and the Prediciotn API is launched within the Testing/QA environment. At this stage, since the parameters have only been trained for 10 iterations, they are not fully optmized, so the Prediction API will not fully predict a "cat" picture. This can be verified by acessing the "Green" API, detyailed below.
+2. After the model has been optimally trained in [Step 2.](#step-2-training-the-classifier), the parameters once again written to the `predict_input` folder fo the S3 bucket and thius the deployment pipeline is triggered. Since the model has been optmially trained, the Prediction API should fully predict a "cat" picture.
 
 During either of the above stages, an e-mail will be sent to the address configured during deployment similar to the following (stripped for brevity):
 ```text
@@ -158,7 +159,7 @@ Included is the e-mail is a link to the *CodePipeline* Service Console to approv
 
     `http://<<GitHub Repo Name>>.us-east-1.elb.amazonaws.com:8080/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`
 
-Accessing the (Greep) API after [Step 2.](#step-2-training-the-classifier)) should correctly predict a "cat" image and thus the **Manual-Approval** stage in CodePipeline can be *Approved*. This in turn will swap the (Green) API to production (Blue), wich can be accessued using **Prediction API URL for Production (Blue)**.
+Accessing the (Green) API after [Step 2.](#step-2-training-the-classifier)) should correctly predict a "cat" image and thus the **Manual-Approval** stage in CodePipeline can be *Approved*. This in turn will swap the (Green) API to production (Blue), wich can be accessued using **Prediction API URL for Production (Blue)**.
 
 It is at this point that a successull integration of a **Machine Learning Pipeline** into a production **DevOps Pipeline** has been successfully demonstrated. To avoid additional charges for AWS resources, refer to the [Cleanup](#cleanup) Section.
 
