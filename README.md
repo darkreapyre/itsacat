@@ -2,17 +2,6 @@
 <!-- Note to Self: Change the picture and text below to reflect when adding to CodeCommit Repository -->
 ![alt text](https://github.com/darkreapyre/LNN/blob/1.0/artifacts/images/Prediction_Architecture-2.png "Architecture")
 
-## Pre-Requisites
->**Note:** This Demo must be run the **us-east-1** AWS Region as it leverages the **AWS Fargate** Service.
-1. This demo uses the [AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html). If the AWS CLI isn't installed,  follow [these](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) instructions. The CLI [configuration](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) needs `PowerUserAccess` and `IAMFullAccess` [IAM policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) associated. To verify that the AWS CLI is installed and up to date, run the following:
-```console
-    $ aws --version
-```
-2. Clone the repo.
-```console
-    $ git checkout 1.0
-``` 
-
 ## Deployment
 1. Make any changes to the Neural Network configuraiton parameters file (`parameters.json`) before running the deployment.
 2. To deploy the environment, an easy to use deployment script has been created to automatically deploy the environment. Start the process by running `bin/deploy`. You will be prompted for the following information:
