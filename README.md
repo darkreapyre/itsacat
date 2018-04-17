@@ -1,1 +1,2 @@
-# Demonstrating the integration of a Machine Learning (ML) Pipeline into the DevOps process.
+# Demo 2 - Leveraging SageMaker for Image Classification
+![alt text](https://github.com/darkreapyre/itsacat/blob/Demo-2/Notebooks/images/Architecture.png "Architecture")
