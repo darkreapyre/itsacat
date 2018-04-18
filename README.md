@@ -53,7 +53,7 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
                 "Sid": "VisualEditor0",
                 "Effect": "Allow",
                 "Action": "s3:ListBucket",
-                "Resource": "arn:aws:s3:::itsacat-demo-1"
+                "Resource": "arn:aws:s3:::<<UNIQUE S3 BUCKET>>"
             },
             {
                 "Sid": "VisualEditor1",
@@ -63,7 +63,7 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
                     "s3:GetObject",
                     "s3:DeleteObject"
                 ],
-                "Resource": "arn:aws:s3:::itsacat-demo-1/*"
+                "Resource": "arn:aws:s3:::<<UNIQUE S3 BUCKET>>/*"
             },
             {
                 "Sid": "VisualEditor2",
@@ -91,7 +91,7 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
     - Under the Shell run the following commands:
     ```shell
         $ cd SageMaker
-        $ git clone https://github.com/<<GitHub User Name>>/itsacat
+        $ git clone `https://github.com/<<GitHub User Name>>/itsacat`
         $ cd itsacat
         $ git checkout Demo-1
         $ exit
