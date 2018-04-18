@@ -91,7 +91,7 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
     - Under the Shell run the following commands:
     ```shell
         $ cd SageMaker
-        $ git clone `https://github.com/<<GitHub User Name>>/itsacat`
+        $ git clone https://github.com/<<GitHub User Name>>/itsacat
         $ cd itsacat
         $ git checkout Demo-1
         $ exit
