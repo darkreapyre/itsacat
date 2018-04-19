@@ -31,7 +31,7 @@ Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon
     - Create notebook instance.
 4. You should see Status -> Pending.
 5. Under "Actions" -> Select "Open".
-6. After the Jupyter Interface has opened, Clone the GitHuib Repository.
+6. After the Jupyter Interface has opened, Clone the GitHub Repository.
     - Under the "Files" tab -> Click "New" -> "Terminal".
     - Under the Shell run the following commands:
     ```shell
@@ -104,9 +104,9 @@ Included is the e-mail is a link to the *CodePipeline* Service Console to approv
 
     `http://<<GitHub Repo Name>>.us-east-1.elb.amazonaws.com:8080/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`
 
-Accessing the (Greep) API after [Step 2.](#step-2-training-the-classifier)) should correctly predict a "cat" image and thus the **Manual-Approval** stage in CodePipeline can be *Approved*. This in turn will swap the (Green) API to production (Blue), wich can be accessued using **Prediction API URL for Production (Blue)**.
+Accessing the (Green) API after [Step 2.](#step-2-training-the-classifier)) should correctly predict a "cat" image and thus the **Manual-Approval** stage in CodePipeline can be *Approved*. This in turn will swap the (Green) API to production (Blue), wich can be accessued using **Prediction API URL for Production (Blue)**.
 
-It is at this point that a successull integration of a **Machine Learning Pipeline** into a production **DevOps Pipeline** has been successfully demonstrated. To avoid additional charges for AWS resources, refer to the [Cleanup](#cleanup) Section.
+It is at this point that a successful integration of a **Machine Learning Pipeline** into a production **DevOps Pipeline** has been successfully demonstrated. To avoid additional charges for AWS resources, refer to the [Cleanup](#cleanup) Section.
 
 ## Troubleshooting
 Since the framework launches a significant amount of Asynchronous Lambda functions without any pre-warming, the **CloudWatch** logs may display an error similar to the following:  
@@ -127,7 +127,7 @@ To address this, simply delete all the DynamoDB Tables as well as data set (`dat
     - Open the SageMaker Service console.
     - Select the Notebook Instance and Stop it, if the instance is still running.
     - Select the Notebook Instance -> click Actions -> Delete.
-2. After the SageMaker Notebook Instance is deleted, delete the CloudFormnation Stack.
+2. After the SageMaker Notebook Instance is deleted, delete the CloudFormation Stack.
     - Open the CloudFormation Service console.
     - Ensure all nested stacks have a **CREATE_COMPLETE** or **UPDATE_COMPLETE** Status. If not, wait for any stack updates to complete.
     - Select the Elastic Container Service (ECS) Stack created by CodePipeline. e.g. **`<<Stack Name>>-DeploymentPipeline-...-ecs-cluster`**
@@ -145,7 +145,7 @@ To address this, simply delete all the DynamoDB Tables as well as data set (`dat
     - Repeat the above process for **NeuronLambda**, **S3TriggerLambda**, **LaunchLambda**, **TrainerLambda**  and any of the logs created by CodePipeline.
 5. Delete the S3 Bucket.
     - Open the S3 Service console.
-    - Highlite the bucket created at deployment time -> Delete bucket.
+    - Highlight the bucket created at deployment time -> Delete bucket.
     - Perform the same actions for the bucket used by CodePipeline for artifacts.
 6. Delete any Elastic Container Repositories (ECR) created by CodePipeline.
     - Open the amazon ECS Service Console.
