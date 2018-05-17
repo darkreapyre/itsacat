@@ -14,7 +14,13 @@ Below is a table highlighting some of the *Pros* and *Cons* of using this method
 |    | - Inflexibility of the framework to try alternate optimization methods. |
 |    | - Model training can delay DevOps Delivery process. |
 
-2. The second demonstration addresses the **Cons** (listed in the Table above), 
+2. The second demonstration **(Amazon SageMaker for Image Classification)** addresses the **Cons** (listed in the Table above), by leveraging [Amazon SageMaker](https://aws.amazon.com/sagemaker/?sc_channel=PS&sc_campaign=pac_ps_q4&sc_publisher=google&sc_medium=sagemaker_b_pac_search&sc_content=sagemaker_e&sc_detail=aws%20sagemaker&sc_category=sagemaker&sc_segment=webp&sc_matchtype=e&sc_country=US&sc_geo=namer&sc_outcome=pac&s_kwcid=AL!4422!3!245225393502!e!!g!!aws%20sagemaker&ef_id=WmohTgAAAMdt-TCT:20180517221409:s) to build, train and deploy the same MLP model at scale. **Amazon SageMaker** addresses the various issues by:
+
+    1. Providing an integrated Notebook instance, allowing user to explore AWS data in [Jupyter Notebooks](http://jupyter.org), and use algorithms to create models via training jobs.
+    2. Allowing users to track training jobs that leverage high-performance AWS or custom-built algorithms.
+    3. Allowing users to create models for hosting from job outputs, or import externally trained models into Amazon SageMaker.
+    4. Providing the ability to test and finalize the best training hyper-parameters.
+    5. Deploying endpoints for developers to use in production as well as A/B Test model variants via an endpoints.
 
 ## Pre-Requisites
 
@@ -42,10 +48,18 @@ The AWS region name is always listed in the upper-right corner of the AWS Manage
 
 2. Execute the specific Demo.
 
-    i. For **Serverless Neural Network for Image Classification**, run the following:
+    2.1 For the **Serverless Neural Network for Image Classification** Demo, run the following:  
 
-```console
-    $ cd itsacat
-    $ git checkout 1.0
 ```
-    ii. For 
+    $ cd itsacat
+    $ git checkout Demo-1
+```
+
+    2.2 For the **Amazon SageMaker for Image Classification**, run the the following:
+
+```
+    $ cd itsacat
+    $ git checkout Demo-2
+```
+
+3. View the **README** for the 
