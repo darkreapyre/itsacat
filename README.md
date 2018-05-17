@@ -1,8 +1,9 @@
 # Demo 2 - Amazon SageMaker for Image Classification
-<!-- Note to Self: Change the picture and text below to reflect when adding to CodeCommit Repository -->
-![alt text](https://github.com/darkreapyre/itsacat/blob/Demo-2/Notebooks/images/Architecture.png "Architecture")
+
+![Architecture](https://github.com/darkreapyre/itsacat/blob/Demo-2/Notebooks/images/Architecture.png)
 
 ## Deployment
+
 1. To deploy the environment, an easy to use deployment script has been created to automatically deploy the environment. Start the process by running `bin/deploy`. You will be prompted for the following information:
 ```console
     Enter the S3 bucket to create > sagemaker-us-east-1-<<AWS ACCOUNT>>
