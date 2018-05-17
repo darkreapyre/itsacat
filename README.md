@@ -1,4 +1,4 @@
-# Demo 2 - Amazon SageMaker for Image Classification
+# Demo 2 - Leveraging Amazon SageMaker for Image Classification
 
 ![Architecture](https://github.com/darkreapyre/itsacat/blob/Demo-2/Notebooks/images/Architecture.png)
 
