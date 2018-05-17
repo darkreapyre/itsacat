@@ -45,15 +45,15 @@ The AWS region name is always listed in the upper-right corner of the AWS Manage
 ## Running the Demo
 
 1. [Fork](https://help.github.com/articles/fork-a-repo/) the [itsacat](https://github.com/darkreapyre/itsacat) repository.
-2. Execute the specific Demo.
+2. Execute the specific Demo.  
     2.1 For the **Serverless Neural Network for Image Classification** Demo, run the following:  
-```
+    ```
     $ cd itsacat
     $ git checkout Demo-1
-```
+    ```
     2.2 For the **Amazon SageMaker for Image Classification**, run the the following:
-```
+    ```
     $ cd itsacat
     $ git checkout Demo-2
-```
+    ```
 3. View the **README** for the 
