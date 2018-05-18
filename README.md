@@ -6,6 +6,7 @@
 1. Make any changes to the Neural Network configuraiton parameters file (`parameters.json`) before running the deployment e.g. Number of Layers, Neurons per Layer etc.
 2. To deploy the environment, an easy to use deployment script has been created to automatically deploy the environment. Start the process by running `bin/deploy`. You will be prompted for the following information:
 ```console
+    Enter the AWS Region to use > <<AWS Region>>
     Enter the S3 bucket to create > <<UNIQUE S3 BUCKET>>
     Enter the name of the Stack to deploy > <<UNIQUE CLOUDFOMRATION STACK NAME>>
     Enter GitHub User > <<GitHub Username>>
