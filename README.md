@@ -38,18 +38,17 @@ Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon
     - Under the Shell run the following commands:
     ```shell
         $ cd SageMaker
-        $ git clone `https://github.com/<<Repository Name>>/itsacat`
+        $ git clone `https://github.com/<<GitHub Username>/itsacat`
         $ git checkout Demo-2
         $ exit
     ```
-    - Go back to the "Files" tab -> click "`<<Repository Nane>>`" -> click "Notebooks" -> select `ItsaCat-Gluon_Codebook.ipynb`
+    - Go back to the "Files" tab -> click "`<<GitHub Username>>`" -> click "Notebooks" -> select `ItsaCat-Gluon_Codebook.ipynb`
 
 ## Demo Process Flow
 To follow the Machine Learning Pipeline process flow the two steps listed below:
 
 ### Step 1. Jupyter Notebooks
-<!--
-Three Jupyter Notebooks have been created to explain and simulate the *Data Scientist's* and *DevOps Engineer's* role witin the Machine Learning Pipeline process.
+<!--Three Jupyter Notebooks have been created to explain and simulate the *Data Scientist's* and *DevOps Engineer's* role witin the Machine Learning Pipeline process.
 - To run the notebook document step-by-step (one cell a time) by pressing shift + enter.
 - To run the whole notebook in a single step by clicking on the menu Cell -> Run All.
 - To restart the kernel (i.e. the computational engine), click on the menu Kernel -> Restart. This can be useful to start over a computation from scratch (e.g. variables are deleted, open files are closed, etc…).
@@ -77,8 +76,8 @@ Work through the various code cells to see:
 2. How well the model performs against the **Test** dataset.
 3. How well the model performs against new images.
 
->**Note:** Ensure to add the name of the S3 Bucket and AWS Region, used during deployment, to get the correct results files created during the training process.
--->
+>**Note:** Ensure to add the name of the S3 Bucket and AWS Region, used during deployment, to get the correct results files created during the training process.-->
+
 ### Step 4. Prediction API
 The deployment pipeline for the production application is triggered at two separate stages within the Demo Process Flow:
 - After executing the `Codebook.ipynb` in [Step 1.](#step-1-jupyter-notebooks), the parameters are written to the `predict_input` folder of the S3 bucket. Since this is a Source for CodePipeline to trigger the deployment. At this stage, since the parameters have only been trained for 10 iterations, they are not fully optmized, so the Prediction API will not fully predict a "cat" picture.
