@@ -3,9 +3,10 @@
 ![Architecture](https://github.com/darkreapyre/itsacat/blob/Demo-2/Notebooks/images/Architecture.png)
 
 ## Deployment
-
+>**Note:** This demonstration has been tested in the `us-east-1` AWS Region.
 1. To deploy the environment, an easy to use deployment script has been created to automatically deploy the environment. Start the process by running `bin/deploy`. You will be prompted for the following information:
 ```console
+    Enter the AWS Region to use > <<AWS Region>>
     Enter the S3 bucket to create > sagemaker-<<AWS Region>>-<<AWS ACCOUNT>>
     Enter the name of the Stack to deploy > <<UNIQUE CLOUDFOMRATION STACK NAME>>
     Enter GitHub User > <<GitHub Username>>
