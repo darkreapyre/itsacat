@@ -29,7 +29,7 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
     - Notebook instance name.
     - Notebook instance type -> ml.t2.medium.
     - IAM Role -> Create new role.
-        - Specific S3 Bucket -> `<<UNIQUE BUCKET NAME>>` -> Create Role.
+        - Specific S3 Bucket -> `<<UNIQUE S3 BUCKET>>` -> Create Role.
     - VPC -> `<<UNIQUE STACK NAME>>`.
     - Subnet -> Select the subnet marked `<<Private Subnet (AZ1)>>`.
     - Security group(s) -> ComputeSecurityGroup.
