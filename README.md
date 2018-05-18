@@ -29,7 +29,7 @@ Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon
     - Notebook instance name.
     - Notebook instance type -> ml.t2.medium.
     - IAM Role -> Create new role.
-    - Specific S3 Bucket -> sagemaker-us-east-1-<<AWS ACCOUNT>> -> Create Role.
+    - Specific S3 Bucket -> sagemaker-<<AWS Region>>-<<AWS ACCOUNT>> -> Create Role.
     - Create notebook instance.
 4. You should see Status -> Pending.
 5. Under "Actions" -> Select "Open".
@@ -38,8 +38,8 @@ Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon
     - Under the Shell run the following commands:
     ```shell
         $ cd SageMaker
-        $ git clone `https://github.com/<<Repository Name>>/LNN`
-        $ git checkout 1.0
+        $ git clone `https://github.com/<<Repository Name>>/itsacat`
+        $ git checkout Demo-2
         $ exit
     ```
     - Go back to the "Files" tab -> click "`<<Repository Nane>>`" -> click "Notebooks" -> select `ItsaCat-Gluon_Codebook.ipynb`
