@@ -2,6 +2,7 @@
 ![alt text](https://github.com/darkreapyre/itsacat/blob/Demo-1/Notebooks/images/Architecture.png "Architecture")
 
 ## Deployment
+>**Note:** This demonstration has been tested in the `us-east-1` AWS Region.
 1. Make any changes to the Neural Network configuraiton parameters file (`parameters.json`) before running the deployment e.g. Number of Layers, Neurons per Layer etc.
 2. To deploy the environment, an easy to use deployment script has been created to automatically deploy the environment. Start the process by running `bin/deploy`. You will be prompted for the following information:
 ```console
