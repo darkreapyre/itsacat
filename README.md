@@ -6,7 +6,7 @@
 
 1. To deploy the environment, an easy to use deployment script has been created to automatically deploy the environment. Start the process by running `bin/deploy`. You will be prompted for the following information:
 ```console
-    Enter the S3 bucket to create > sagemaker-us-east-1-<<AWS ACCOUNT>>
+    Enter the S3 bucket to create > sagemaker-<<AWS Region>>-<<AWS ACCOUNT>>
     Enter the name of the Stack to deploy > <<UNIQUE CLOUDFOMRATION STACK NAME>>
     Enter GitHub User > <<GitHub Username>>
     Enter GitHubToken > <<GitHub Token>>
