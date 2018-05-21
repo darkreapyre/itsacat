@@ -56,7 +56,14 @@ The `ItsaCat-Gluon_Codebook.ipynb` has been created to explain the typical proce
 4. Prediction Endpoint Performance Analysis.
 
 ### Step 2. - Production API
-Once an optimized model has been trained and tested, it can be integrated into the production application by leveraging the *DevOps*  process.
+After the model has been optimally trained and validated in [Step 1.](#step-1-jupyter-notebook), it can be integrated into the Production application by leveraging the *DevOps* process. To accomplish this, follow these steps:
+
+1. Add the optimized model training job name to `src/endpoint.py` *(line 13)*, so that it resembles the following:
+```python
+    training_job = 'sagemaker-mxnet-2018-04-27-15-06-57-730'
+```
+2. 
+
 
 
 <!-- ### Step 4. Prediction API
