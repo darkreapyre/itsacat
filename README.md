@@ -137,7 +137,7 @@ Work through the various code cells to see:
 ### Step 4. Prediction API
 The deployment pipeline for the production application is triggered at two separate stages within the Demo Process Flow:
 1. After executing the `Codebook.ipynb` in [Step 1.](#step-1-jupyter-notebooks), the parameters from the 10 Epoch training example are written to the `predict_input` folder of the S3 bucket. Since this is a "Source" for CodePipeline to trigger the deployment, the CI/CD portion of the DevOps Pipeline is started and the Prediciotn API is launched within the Testing/QA environment. At this stage, since the parameters have only been trained for 10 iterations, they are not fully optmized, so the Prediction API will not fully predict a "cat" picture. This can be verified by acessing the "Green" API, detyailed below.
-2. After the model has been optimally trained in [Step 2.](#step-2-training-the-classifier), the parameters once again written to the `predict_input` folder fo the S3 bucket and thius the deployment pipeline is triggered. Since the model has been optmially trained, the Prediction API should fully predict a "cat" picture.
+2. After the model has been optimally trained in [Step 2.](#step-2-training-the-classifier), the parameters are once again written to the `predict_input` folder fo the S3 bucket and thius the deployment pipeline is triggered. Since the model has been optmially trained, the Prediction API should fully predict a "cat" picture.
 
 During either of the above stages, an e-mail will be sent to the address configured during deployment similar to the following (stripped for brevity):
 ```text
