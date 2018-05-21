@@ -47,38 +47,19 @@ Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon
 ## Demo Process Flow
 To follow the Machine Learning Pipeline process flow the two steps listed below:
 
-### Step 1. Jupyter Notebooks
-<!--Three Jupyter Notebooks have been created to explain and simulate the *Data Scientist's* and *DevOps Engineer's* role witin the Machine Learning Pipeline process.
-- To run the notebook document step-by-step (one cell a time) by pressing shift + enter.
-- To run the whole notebook in a single step by clicking on the menu Cell -> Run All.
-- To restart the kernel (i.e. the computational engine), click on the menu Kernel -> Restart. This can be useful to start over a computation from scratch (e.g. variables are deleted, open files are closed, etc…).
-- More information on editing a notebook: [Notebook Basics](http://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Notebook%20Basics.ipynb)
+### Step 1. - Jupyter Notebook
+The `ItsaCat-Gluon_Codebook.ipynb` has been created to explain the typical process the *Data Scientist* follows within the Machine Learning Pipeline, namely:
 
-#### `Introduction.ipynb` Notebook
-The **Introduction** provides an overview of the *Architecture*, *Why* and *How* the *Serverless Neural Network* is implemented.
+1. Input Data Preparation and Upload.
+2. Training the Classifier.
+3. Model Training Performance Analysis.
+4. Prediction Endpoint Performance Analysis.
 
-#### `Codebook.ipynb` Notebook
-The **Codebook** provides an overview of the various *Python Libraries*, *Helper Functions* and the *Handler* functions that are integrated into each of the Lambda Functions. It also provides a sample implementation of the Neural Network, to get an understanding of how the full training process will be executed. After executing the various cells withing the *CodeBook*, the results from the *10 Epoch* sample will trigger the production deployment pipeline. To view the unoptmized version the Prediction API in the QA/Staging environment, see the [Prediction API](#step-4-prediction-api) step of the process flow.
->**Note:** In order to avoid any conflict with the Parameter Server (ElastiCache) and to avoid unnecessary serivce charges, a good practice is to Stop the SageMaker Notebook Instance before proceeding to the next step.
+### Step 2. - Production API
+Once an optimized model has been trained and tested, it can be integrated into the production application by leveraging the *DevOps*  process.
 
-### Step 2. Training the Classifier
-To train the full classification model on the *SNN* framework, simply upload the `datasets.h5` file found in the `artifacts\datasets` directory to the `training_iput` folder of the S3 bucket that has already been created by the deployment process.
->**Note:** A pre-configured `parameters.json` file has already been created. To change the Neural Network configuration parameters, before running the training process, change this file and upload it to the `training_input` folder of the S3 Bucket before uploading the data set.
 
-Once the data file has been uploaded, an S3 Event will automatically trigger the training process, and in-depth insight to the training process can be viewed through the **CloudWatch** console. When the model training is complete (typically after 22 hours), the final optimized parameters will be copied to the `prediction_input` folder of the S3 bucket. This will trigger the production deployment pipeline and a message will be sent to review the Prediction API in the QA/Staging environment.
->**Note:** Refer to the [Troubleshooting](#troubleshooting) section for any errors that may appear in the **CloudWatch** Console.
-
-### Step 3. Analyzing the Results
-Once the training process has successfully completed, an e-mail will be sent to the address configured during the deployment. To analyze the results of the testing and to determine if the trained model is "production-worthy", using the same *SageMaker* instance used for the *Codebook*, navigate to the `artifacts` directory and launch the `Analysis.ipynb` notebook.
-
-Work through the various code cells to see:
-1. Results fo the training.
-2. How well the model performs against the **Test** dataset.
-3. How well the model performs against new images.
-
->**Note:** Ensure to add the name of the S3 Bucket and AWS Region, used during deployment, to get the correct results files created during the training process.-->
-
-### Step 4. Prediction API
+<!-- ### Step 4. Prediction API
 The deployment pipeline for the production application is triggered at two separate stages within the Demo Process Flow:
 - After executing the `Codebook.ipynb` in [Step 1.](#step-1-jupyter-notebooks), the parameters are written to the `predict_input` folder of the S3 bucket. Since this is a Source for CodePipeline to trigger the deployment. At this stage, since the parameters have only been trained for 10 iterations, they are not fully optmized, so the Prediction API will not fully predict a "cat" picture.
 - After the model has been optimally trained in [Step 2.](#step-2-training-the-classifier), the parameters once again written to the `predict_input` folder fo the S3 bucket and thius the deployment pipeline is triggered. Since the model has been optmially trained, the Prediction API should fully predict a "cat" picture.
@@ -107,7 +88,7 @@ Included is the e-mail is a link to the *CodePipeline* Service Console to approv
 
 Accessing the (Green) API after [Step 2.](#step-2-training-the-classifier)) should correctly predict a "cat" image and thus the **Manual-Approval** stage in CodePipeline can be *Approved*. This in turn will swap the (Green) API to production (Blue), wich can be accessued using **Prediction API URL for Production (Blue)**.
 
-It is at this point that a successful integration of a **Machine Learning Pipeline** into a production **DevOps Pipeline** has been successfully demonstrated. To avoid additional charges for AWS resources, refer to the [Cleanup](#cleanup) Section.
+It is at this point that a successful integration of a **Machine Learning Pipeline** into a production **DevOps Pipeline** has been successfully demonstrated. To avoid additional charges for AWS resources, refer to the [Cleanup](#cleanup) Section.-->
 
 ## Troubleshooting
 Since the framework launches a significant amount of Asynchronous Lambda functions without any pre-warming, the **CloudWatch** logs may display an error similar to the following:  
