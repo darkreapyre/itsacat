@@ -17,7 +17,7 @@
 
 2. The `deploy.sh` script creates the an *S3* Bucket; copies the necessary CloudFormation templates to the Bucket and creates the CloudFormation Stack. Once completed, the following message is displayed:
 ```console
-    "Successfully created/updated stack - <<Stack Name>>"
+    "Successfully created/updated stack - <<UNIQUE CLOUDFOMRATION STACK NAME>>"
 ```
 >**Note:** During the deployment, and e-mail will be sent to the specified address. __Make sure to confirm the subscription to the SNS Topic!__
 
