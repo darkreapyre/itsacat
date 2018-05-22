@@ -6,11 +6,11 @@
 >**Note:** This demonstration has been tested in the `us-east-1` AWS Region.
 1. To deploy the environment, an easy to use deployment script has been created to automatically deploy the environment. Start the process by running `bin/deploy`. You will be prompted for the following information:
 ```console
-    Enter the AWS Region to use > <<AWS Region>>
-    Enter the S3 bucket to create > sagemaker-<<AWS Region>>-<<AWS ACCOUNT>>
+    Enter the AWS Region to use > <<AWS REGION>>
+    Enter the S3 bucket to create > sagemaker-<<AWS REGION>>-<<AWS ACCOUNT>>
     Enter the name of the Stack to deploy > <<UNIQUE CLOUDFOMRATION STACK NAME>>
-    Enter GitHub User > <<GitHub Username>>
-    Enter GitHubToken > <<GitHub Token>>
+    Enter GitHub User > <<GITHUB USERNAME>>
+    Enter GitHubToken > <<GITHUB TOKEN>>
     Enter the e-mail address to send training update > <<E-MAIL ADDRESS>>
 ```
 >**Note:** For more information on creating a GitHub [Token](https://github.com/settings/tokens).
@@ -29,7 +29,7 @@ Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon
     - Notebook instance name.
     - Notebook instance type -> ml.t2.medium.
     - IAM Role -> Create new role.
-    - Specific S3 Bucket -> sagemaker-<<AWS Region>>-<<AWS ACCOUNT>> -> Create Role.
+    - Specific S3 Bucket -> sagemaker-<<AWS REGION>>-<<AWS ACCOUNT>> -> Create Role.
     - Create notebook instance.
 4. You should see Status -> Pending.
 5. Under "Actions" -> Select "Open".
@@ -38,11 +38,11 @@ Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon
     - Under the Shell run the following commands:
     ```shell
         $ cd SageMaker
-        $ git clone `https://github.com/<<GitHub Username>/itsacat`
+        $ git clone https://github.com/<<GITHUB USERNAME>>/itsacat
         $ git checkout Demo-2
         $ exit
     ```
-    - Go back to the "Files" tab -> click "`<<GitHub Username>>`" -> click "Notebooks" -> select `ItsaCat-Gluon_Codebook.ipynb`
+    - Go back to the **Files** tab -> click `itsacat` -> click **Notebooks** -> select `ItsaCat-Gluon_Codebook.ipynb`
 
 ## Demo Process Flow
 To follow the Machine Learning Pipeline process flow the two steps listed below:
