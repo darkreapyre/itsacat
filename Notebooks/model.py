@@ -11,7 +11,7 @@ from json import dumps, loads
 from mxnet import nd, autograd, gluon
 
 # Set logging
-logging.getLogger().setLevel(logging.INFO)
+logging.getLogger().setLevel(logging.WARNING)
 
 # ---------------------------------------------------------------------------- #
 #                            Training functions                                #
@@ -101,6 +101,7 @@ def train(channel_input_dirs, hyperparameters, hosts, num_gpus, output_data_dir,
             results['epoch'+str(epoch)]['val_acc'] = val_accuracy
             results['epoch'+str(epoch)]['train_acc'] = train_accuracy
             results['End'] = str(datetime.datetime.now())
+            break
             
     # Save the results
     print("Saving the training results ...")
