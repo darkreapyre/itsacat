@@ -11,7 +11,7 @@ from json import dumps, loads
 from mxnet import nd, autograd, gluon
 
 # Set logging
-logging.getLogger().setLevel(logging.WARNING)
+logging.getLogger("requests.packages.urllib3.connectionpool").setLevel(logging.WARNING)
 
 # ---------------------------------------------------------------------------- #
 #                            Training functions                                #
