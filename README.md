@@ -51,10 +51,16 @@ To follow the Machine Learning Pipeline process flow the two steps listed below:
 ### Step 1. - Jupyter Notebook
 The `ItsaCat-Gluon_Codebook.ipynb` has been created to explain the typical process the *Data Scientist* follows within the Machine Learning Pipeline, namely:
 
-1. Input Data Preparation and Upload.
-2. Training the Classifier.
-3. Model Training Performance Analysis.
-4. Prediction Endpoint Performance Analysis.
+1. Using the Notebook instance to understand and Manage the Input Data.
+2. Training the Classifier as a SageMaker Training Job.
+3. Performance Analysis of the Trained Model.
+4. Performance Analysis of the Inference Endpoint.
+
+Work through these steps on the Notebook to see the pipeline in action.
+- To run the notebook document step-by-step (one cell a time) by pressing shift + enter.
+- To run the whole notebook in a single step by clicking on the menu **Cell** -> **Run All**.
+- To restart the kernel (i.e. the computational engine), click on the menu **Kernel** -> **Restart**. This can be useful to start over a computation from scratch (e.g. variables are deleted, open files are closed, etc…).
+- More information on editing a notebook can be found on the [Notebook Basics](http://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Notebook%20Basics.ipynb) page.
 
 ### Step 2. - Production API
 After the model has been optimally trained and validated in [Step 1.](#step-1-jupyter-notebook), it can be integrated into the Production application by leveraging the *DevOps* process. To accomplish this, follow these steps:
@@ -63,7 +69,7 @@ After the model has been optimally trained and validated in [Step 1.](#step-1-ju
 ```python
     training_job = 'sagemaker-mxnet-2018-04-27-15-06-57-730'
 ```
-2. 
+2. Commit the application chnages to trigger the deployment of the 
 
 
 
@@ -113,30 +119,18 @@ Since the framework launches a significant amount of Asynchronous Lambda functio
 To address this, simply delete all the DynamoDB Tables as well as data set (`datasets.h5`) from the S3 Bucket and re-upload data set to re-launch the training process.
 
 ## Cleanup
-1. Delete the SageMaker Notebook instance.
-    - Open the SageMaker Service console.
-    - Select the Notebook Instance and Stop it, if the instance is still running.
-    - Select the Notebook Instance -> click Actions -> Delete.
-2. After the SageMaker Notebook Instance is deleted, delete the CloudFormation Stack.
-    - Open the CloudFormation Service console.
-    - Ensure all nested stacks have a **CREATE_COMPLETE** or **UPDATE_COMPLETE** Status. If not, wait for any stack updates to complete.
-    - Select the Elastic Container Service (ECS) Stack created by CodePipeline. e.g. **`<<Stack Name>>-DeploymentPipeline-...-ecs-cluster`**
-    - Click Actions -> Delete Stack -> "Yes, Delete".
-    - Select the stack created by the initial deployment and repeat the above step.
-3. Delete DynamoDB Tables.
-    - Open DynamoDB Service console.
-    - Select "Tables" in the navigation panel.
-    - Check **NeuronLambda** -> Delete table -> Delete.
-    - Repeat the above process for the **Costs**, **TrainerLambda** and **LaunchLambda** tables.
-4. Delete the CloudWatch Logs.
-    - Open the CloudWatch Service console.
-    - Select "Logs" in the navigation panel.
-    - Check */aws/lambda/LaunchLambda* -> Actions -> Delete log group -> Yes, Delete.
-    - Repeat the above process for **NeuronLambda**, **S3TriggerLambda**, **LaunchLambda**, **TrainerLambda**  and any of the logs created by CodePipeline.
-5. Delete the S3 Bucket.
-    - Open the S3 Service console.
-    - Highlight the bucket created at deployment time -> Delete bucket.
-    - Perform the same actions for the bucket used by CodePipeline for artifacts.
+Additionally, use the AWS Management Console to delete any additional resources that are created by the demo.
+
+1. Open the [SageMaker Management Console](https://console.aws.amazon.com/sagemaker/) and delete:
+    - The hosted endpoint.
+    - The endpoint configuration.
+    - The model.
+    - The notebook instance.
+    >**Note:** The Instance will need to be stopped before deleting it.
+2. Open the [Amazon S3 console](https://console.aws.amazon.com/s3/) and delete the bucket that was created for storing model artifacts and the training dataset.
+3. Open the [IAM console](https://console.aws.amazon.com/iam/) and delete the IAM role. If permission policies were created, delete them, too.
+4. Open the [Amazon CloudWatch console](https://console.aws.amazon.com/cloudwatch/) and delete all of the log groups that have names starting with `/aws/sagemaker/`.
+5. Open the [AWS CloudFormation Console](https://console.aws.amazon.com/cloudformation/home) and delete **TBD**
 6. Delete any Elastic Container Repositories (ECR) created by CodePipeline.
     - Open the amazon ECS Service Console.
     - Select Amazon ECR -> Repositories.
