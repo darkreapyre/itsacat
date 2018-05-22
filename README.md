@@ -29,16 +29,17 @@ Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon
     - Notebook instance name.
     - Notebook instance type -> ml.t2.medium.
     - IAM Role -> Create new role.
-    - Specific S3 Bucket -> sagemaker-<<AWS REGION>>-<<AWS ACCOUNT>> -> Create Role.
+    - Specific S3 Bucket -> `sagemaker-<<AWS REGION>>-<<AWS ACCOUNT>>` -> Create Role.
     - Create notebook instance.
 4. You should see Status -> Pending.
-5. Under "Actions" -> Select "Open".
+5. Under **Actions** -> Select **Open**.
 6. After the Jupyter Interface has opened, Clone the GitHub Repository.
-    - Under the "Files" tab -> Click "New" -> "Terminal".
+    - Under the **Files** tab -> Click **New** -> **Terminal**.
     - Under the Shell run the following commands:
     ```shell
         $ cd SageMaker
         $ git clone https://github.com/<<GITHUB USERNAME>>/itsacat
+        $ cd itsacat
         $ git checkout Demo-2
         $ exit
     ```

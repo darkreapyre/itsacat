@@ -22,6 +22,7 @@ def train(channel_input_dirs, hyperparameters, hosts, num_gpus, output_data_dir,
     optmizer = hyperparameters.get('optmizer', 'sgd')
     lr = hyperparameters.get('learning_rate', 75e-4)
     batch_size = hyperparameters.get('batch_size', 64)
+    threshold = hyperparameters.get('threshold', 0.0019)
     
     # Set Local vs. Distributed training
     if len(hosts) == 1:
@@ -93,7 +94,7 @@ def train(channel_input_dirs, hyperparameters, hosts, num_gpus, output_data_dir,
             results['epoch'+str(epoch)]['cost'] = cumulative_loss/num_examples
             results['epoch'+str(epoch)]['val_acc'] = val_accuracy
             results['epoch'+str(epoch)]['train_acc'] = train_accuracy
-        elif epoch == epochs-1:
+        elif epoch == epochs-1 or cumulative_loss/num_examples <= eval("%.0e" % (threshold)):
             print("Epoch: {}; Loss: {}; Train-accuracy = {}; Validation-accuracy = {}"\
             .format(epoch,cumulative_loss/num_examples,train_accuracy,val_accuracy))
             results['epoch'+str(epoch)]['cost'] = cumulative_loss/num_examples
