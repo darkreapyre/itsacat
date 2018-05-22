@@ -69,54 +69,36 @@ After the model has been optimally trained and validated in [Step 1.](#step-1-ju
 ```python
     training_job = 'sagemaker-mxnet-2018-04-27-15-06-57-730'
 ```
-2. Commit the application chnages to trigger the deployment of the 
-
-
-
-<!-- ### Step 4. Prediction API
-The deployment pipeline for the production application is triggered at two separate stages within the Demo Process Flow:
-- After executing the `Codebook.ipynb` in [Step 1.](#step-1-jupyter-notebooks), the parameters are written to the `predict_input` folder of the S3 bucket. Since this is a Source for CodePipeline to trigger the deployment. At this stage, since the parameters have only been trained for 10 iterations, they are not fully optmized, so the Prediction API will not fully predict a "cat" picture.
-- After the model has been optimally trained in [Step 2.](#step-2-training-the-classifier), the parameters once again written to the `predict_input` folder fo the S3 bucket and thius the deployment pipeline is triggered. Since the model has been optmially trained, the Prediction API should fully predict a "cat" picture.
-
-During either of the above stages, an e-mail will be sent to the address configured during deployment similar to the following (stripped for brevity):
-```text
-Hello,
-
-The following Approval action is waiting for your response:
-
---Pipeline Details--
-
-...
+2. Commit the application changes to trigger the deployment of the Production API by running the following commands:
+```console
+    $ git add -A
+    $ git commit -m "Added new SageMaker training job for testing"
+    $ git push
 ```
-Included is the e-mail is a link to the *CodePipeline* Service Console to approve the deployment from QA to Production. To view and test the Prediction API in the QA stage, execute the following:
-1. Open the *CloudFormation* Service Console and select the nested Stack for the Elastic Container Service (ECS). e.g. **`<<Stack Name>>-DeploymentPipeline-...-ecs-cluster`**.
-2. Click on the CloudFormation Outputs tab.
-3. The *ApplicationURL** Value provides a link to the **Prediction API URL for Production (Blue)**. Clicking on this link will open a browser page to the Prediciton API. Successful connection to the API will display the **"Ping Successfull!"** message.
-4. To view the production (Blue) API, find the URL of a "cat" picture (e.g.[Grumpy Cat](http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg)) and add it to the URL as follows:
+>**Note:** During the above stages, an e-mail will be sent to the address configured during deployment similar to the following (stripped for brevity):
+```text
+    Hello,
+
+    The following Approval action is waiting for your response:
+
+    --Pipeline Details--
+
+    ...
+```
+>Included is the e-mail is a link to the *CodePipeline* Service Console to approve the deployment from QA to Production. 
+3. To view and test the Prediction API in the QA stage, open the *CloudFormation* Service Console and select the nested Stack for the Elastic Container Service (ECS). e.g. **`<<UNIQUE CLOUDFORMATION STACK NAME>>-DeploymentPipeline-...-ecs-cluster`**.
+4. Click on the CloudFormation **Outputs** tab. The **ApplicationURL** Value provides a link to the **Prediction API URL for Production (Blue)**. Clicking on this link will open a browser page to the Prediction API. Successful connection to the API will display the **"Ping Successfull!"** message.
+5. To view the production (Blue) API, find the URL of a "cat" picture (e.g.[Grumpy Cat](http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg)) and add it to the URL as follows:
     
     `http://<<GitHub Repo Name>>.us-east-1.elb.amazonaws.com/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`
 
-5. To view the Test/Staging (Green) API, simply change the port to **8080** as follows:
+6. To view the Test/Staging (Green) API, simply change the port to **8080** as follows:
 
-    `http://<<GitHub Repo Name>>.us-east-1.elb.amazonaws.com:8080/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`
+    `http://<<GitHub Repo Name>>.us-east-1.elb.amazonaws.com:8080/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`  
 
-Accessing the (Green) API after [Step 2.](#step-2-training-the-classifier)) should correctly predict a "cat" image and thus the **Manual-Approval** stage in CodePipeline can be *Approved*. This in turn will swap the (Green) API to production (Blue), wich can be accessued using **Prediction API URL for Production (Blue)**.
+7. Accessing the (Green) API should correctly predict a "cat" image and thus the **Manual-Approval** stage in CodePipeline can be *Approved*. This in turn will swap the (Green) API to production (Blue), which can be accessed using **Prediction API URL for Production (Blue)**.
 
-It is at this point that a successful integration of a **Machine Learning Pipeline** into a production **DevOps Pipeline** has been successfully demonstrated. To avoid additional charges for AWS resources, refer to the [Cleanup](#cleanup) Section.-->
-
-## Troubleshooting
-Since the framework launches a significant amount of Asynchronous Lambda functions without any pre-warming, the **CloudWatch** logs may display an error similar to the following:  
-**Streams for /aws/lambda/TrainerLambda**
-```python
-    list index out of range: IndexError
-    Traceback (most recent call last):
-    File "/var/task/trainer.py", line 484, in lambda_handler
-    A = vectorizer(Outputs='a', Layer=layer-1)
-    File "/var/task/trainer.py", line 235, in vectorizer
-    key_list.append(result[0])
-    IndexError: list index out of range
-```
-To address this, simply delete all the DynamoDB Tables as well as data set (`datasets.h5`) from the S3 Bucket and re-upload data set to re-launch the training process.
+It is at this point that a successful integration of a **Machine Learning Pipeline** into a production **DevOps Pipeline** has been successfully demonstrated. To avoid additional charges for AWS resources, refer to the [Cleanup](#cleanup) Section.
 
 ## Cleanup
 Additionally, use the AWS Management Console to delete any additional resources that are created by the demo.
