@@ -2,44 +2,44 @@
 ![alt text](https://github.com/darkreapyre/itsacat/blob/Demo-1/Notebooks/images/Architecture.png "Architecture")
 
 ## Deployment
-1. Make any changes to the Neural Network configuraiton parameters file (`parameters.json`) before running the deployment e.g. Number of Layers, Neurons per Layer etc.
+1. Make any changes to the Neural Network configuration parameters file (`parameters.json`) before running the deployment e.g. Number of Layers, Neurons per Layer etc.
 2. To deploy the environment, an easy to use deployment script has been created to automatically deploy the environment. Start the process by running `bin/deploy`. You will be prompted for the following information:
 ```console
     Enter the S3 bucket to create > <<UNIQUE S3 BUCKET>>
     Enter the name of the Stack to deploy > <<UNIQUE CLOUDFOMRATION STACK NAME>>
-    Enter GitHub User > <<GitHub Username>>
-    Enter GitHubToken > <<GitHub Token>>
+    Enter GitHub User > <<GITHUB USERNAME>>
+    Enter GitHubToken > <<GITHUB TOKEN>>
     Enter the e-mail address to send training update > <<E-MAIL ADDRESS>>
 ```
 >**Note:** For more information on creating a [GitHub Token](https://github.com/settings/tokens).
 
 3. The `deploy.sh` script creates the an *S3* Bucket; copies the necessary CloudFormation templates to the Bucket; creates the Lambda deployment package and uploads it to the Bucket and lastly, it creates the CloudFormation Stack. Once completed, the following message is displayed:
 ```console
-    "Successfully created/updated stack - <<Stack Name>>"
+    "Successfully created/updated stack - <<UNIQUE CLOUDFORMATION STACK NAME>>"
 ```
 >**Note:** During the deployment, and e-mail will be sent to the specified address. __Make sure to confirm the subscription to the SNS Topic!__
 
 ## Integration with SageMaker Notebook Instance
 Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazon.com/sagemaker/) into the stack to start reviewing the Demo content by using the following steps:
-1. Open the SageMaker [console](https://console.aws.amazon.com/sagemaker).
+1. Open the [SageMaker console](https://console.aws.amazon.com/sagemaker).
 2. Create notebook instance.
 3. Notebook instance settings.
     - Notebook instance name.
     - Notebook instance type -> ml.t2.medium.
-    - IAM Role -> Create new role.
-        - Specific S3 Bucket -> `<<UNIQUE BUCKET NAME>>` -> Create Role.
-    - VPC -> `<<UNIQUE STACK NAME>>`.
-    - Subnet -> Select the subnet marked `<<Private Subnet (AZ1)>>`.
-    - Security group(s) -> ComputeSecurityGroup.
-    - Direct Internet Access -> Enable.
-    - Create notebook instance.
-3. You should see Status -> Pending.
+    - **IAM Role** -> **Create new role**.
+        - **Specific S3 Bucket** -> `<<UNIQUE BUCKET NAME>>` -> **Create Role**.
+    - **VPC** -> `<<UNIQUE STACK NAME>>`.
+    - **Subnet** -> Select the subnet marked `<<Private Subnet (AZ1)>>`.
+    - **Security group(s)** -> `ComputeSecurityGroup`.
+    - **Direct Internet Access** -> **Enable**.
+    - **Create notebook instance**.
+3. You should see **Status** -> **Pending**.
 4. Configure Service Access role.
-    - IAM Console -> Role -> `<<AmazonSageMaker-ExecutionRole-...>>`.
-    - Policy name -> `<<AmazonSageMaker-ExecutionPolicy-...>>` -> Edit policy.
-    - Visual editor tab -> Add additional permissions.
-        - Service -> Choose a service -> ElastiCache.
-        - Action -> Select and action
+    - Open the [IAM Console](https://console.aws.amazon.com/iam) -> **Role** -> `<<AmazonSageMaker-ExecutionRole-...>>`.
+    - **Policy name** -> `<<AmazonSageMaker-ExecutionPolicy-...>>` -> **Edit policy**.
+    - Visual editor tab -> **Add additional permissions**.
+        - **Service** -> **Choose a service** -> **ElastiCache**.
+        - **Action** -> **Select an action**
             - All ElastiCache actions (elasticache:*).
         - Repeat the above step to add All DynamoDB actions (dynamoDB:*).
         - Review Policy.
@@ -77,17 +77,17 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
         ]
     }
     ```
-5. Return to the SageMaker console and confirm the Notebook instance is created. Under "Actions" -> Select "Open".
+5. Return to the [SageMaker console]([console](https://console.aws.amazon.com/sagemaker)) and confirm the Notebook instance is created. Under **Actions** -> Select **Open**.
 6. After the Jupyter Interface has opened, Configure the Python Libraries:
-    - Select the "Conda" tab -> under "Conda environments" -> select "python3".
-    - Under "Available packages" -> click the "Search" box -> enter "redis". The following two "redis" packages should be available. 
+    - Select the **Conda** tab -> under **Conda environments** -> select **python3**.
+    - Under **Available packages** -> click the **Search** box -> enter "redis". The following two "redis" packages should be available. 
         - redis
         - redis-py
-    - Select both packages and click the "->" button to install the packages.
-    - Confirm to "Install" on the pop-up.
+    - Select both packages and click the "**->**" button to install the packages.
+    - Confirm to **Install** on the pop-up.
     >**Note:** Ignore any error messages that may pop-up.
 7. Clone the GitHuib Repository.
-    - Under the "Files" tab -> Click "New" -> "Terminal".
+    - Under the **Files** tab -> Click **New** -> **Terminal**.
     - Under the Shell run the following commands:
     ```shell
         $ cd SageMaker
@@ -96,13 +96,13 @@ Once the stack has been deployed, integrate [Amazon SageMaker](https://aws.amazo
         $ git checkout Demo-1
         $ exit
     ```
-    - Go back to the "Files" tab -> click "itsacat" -> click "Notebooks" -> select `Introduction.ipynb`
+    - Go back to the **Files** tab -> click **itsacat** -> click **Notebooks** -> select `Introduction.ipynb`
 
 ## Demo Process Flow
 To follow the Machine Learning Pipeline process flow the four steps listed below:
 
 ### Step 1. Jupyter Notebooks
-Three Jupyter Notebooks have been created to explain and simulate the *Data Scientist's* and *DevOps Engineer's* role witin the Machine Learning Pipeline process.
+Three Jupyter Notebooks have been created to explain and simulate the *Data Scientist's* and *DevOps Engineer's* role within the Machine Learning Pipeline process.
 - To run the notebook document step-by-step (one cell a time) by pressing shift + enter.
 - To run the whole notebook in a single step by clicking on the menu Cell -> Run All.
 - To restart the kernel (i.e. the computational engine), click on the menu Kernel -> Restart. This can be useful to start over a computation from scratch (e.g. variables are deleted, open files are closed, etc…).
@@ -112,8 +112,8 @@ Three Jupyter Notebooks have been created to explain and simulate the *Data Scie
 The **Introduction** provides an overview of the *Architecture*, *Why* and *How* the *Serverless Neural Network* is implemented.
 
 #### `Codebook.ipynb` Notebook
-The **Codebook** provides an overview of the various *Python Libraries*, *Helper Functions* and the *Handler* functions that are integrated into each of the Lambda Functions. It also provides a sample implementation of the Neural Network, to get an understanding of how the full training process will be executed. After executing the various cells withing the *CodeBook*, the results from the *10 Epoch* sample will trigger the production deployment pipeline. To view the unoptmized version the Prediction API in the QA/Staging environment, see the [Prediction API](#step-4-prediction-api) step of the process flow.
->**Note:** In order to avoid any conflict with the Parameter Server (ElastiCache) and to avoid unnecessary serivce charges, a good practice is to Stop the SageMaker Notebook Instance before proceeding to the next step.
+The **Codebook** provides an overview of the various *Python Libraries*, *Helper Functions* and the *Handler* functions that are integrated into each of the Lambda Functions. It also provides a sample implementation of the Neural Network, to get an understanding of how the full training process will be executed. After executing the various cells within the *CodeBook*, the results from the *10 Epoch* sample will trigger the production deployment pipeline. To view the unoptimized version the Prediction API in the QA/Staging environment, see the [Prediction API](#step-4-prediction-api) step of the process flow.
+>**Note:** In order to avoid any conflict with the Parameter Server (ElastiCache) and to avoid unnecessary service charges, a good practice is to Stop the SageMaker Notebook Instance before proceeding to the next step.
 
 ### Step 2. Training the Classifier
 To train the full classification model on the *SNN* framework, simply upload the `datasets.h5` file found in the `Notebooks\datasets` directory to the `training_iput` folder of the S3 bucket that has already been created by the deployment process.
@@ -126,7 +126,7 @@ Once the data file has been uploaded, an S3 Event will automatically trigger the
 Once the training process has successfully completed, an e-mail will be sent to the address configured during the deployment. To analyze the results of the testing and to determine if the trained model is "production-worthy", using the same *SageMaker* instance used for the *Codebook*, navigate to the `artifacts` directory and launch the `Analysis.ipynb` notebook.
 
 Work through the various code cells to see:
-1. Results fo the training.
+1. Results of the training.
 2. How well the model performs against the **Test** dataset.
 3. How well the model performs against new images.
 
@@ -134,8 +134,8 @@ Work through the various code cells to see:
 
 ### Step 4. Prediction API
 The deployment pipeline for the production application is triggered at two separate stages within the Demo Process Flow:
-1. After executing the `Codebook.ipynb` in [Step 1.](#step-1-jupyter-notebooks), the parameters from the 10 Epoch training example are written to the `predict_input` folder of the S3 bucket. Since this is a "Source" for CodePipeline to trigger the deployment, the CI/CD portion of the DevOps Pipeline is started and the Prediciotn API is launched within the Testing/QA environment. At this stage, since the parameters have only been trained for 10 iterations, they are not fully optmized, so the Prediction API will not fully predict a "cat" picture. This can be verified by acessing the "Green" API, detyailed below.
-2. After the model has been optimally trained in [Step 2.](#step-2-training-the-classifier), the parameters once again written to the `predict_input` folder fo the S3 bucket and thius the deployment pipeline is triggered. Since the model has been optmially trained, the Prediction API should fully predict a "cat" picture.
+1. After executing the `Codebook.ipynb` in [Step 1.](#step-1-jupyter-notebooks), the parameters from the 10 Epoch training example are written to the `predict_input` folder of the S3 bucket. Since this is a "Source" for CodePipeline to trigger the deployment, the CI/CD portion of the DevOps Pipeline is started and the Prediction API is launched within the Testing/QA environment. At this stage, since the parameters have only been trained for 10 iterations, they are not fully optimized, so the Prediction API will not fully predict a "cat" picture. This can be verified by accessing the "Green" API, detailed below.
+2. After the model has been optimally trained in [Step 2.](#step-2-training-the-classifier), the parameters once again written to the `predict_input` folder of the S3 bucket and thus the deployment pipeline is triggered. Since the model has been optimally trained, the Prediction API should fully predict a "cat" picture.
 
 During either of the above stages, an e-mail will be sent to the address configured during deployment similar to the following (stripped for brevity):
 ```text
@@ -148,9 +148,9 @@ The following Approval action is waiting for your response:
 ...
 ```
 Included is the e-mail is a link to the *CodePipeline* Service Console to approve the deployment from QA to Production. To view and test the Prediction API in the QA stage, execute the following:
-1. Open the *CloudFormation* Service Console and select the nested Stack for the Elastic Container Service (ECS). e.g. **`<<Stack Name>>-DeploymentPipeline-...-ecs-cluster`**.
-2. Click on the CloudFormation Outputs tab.
-3. The *ApplicationURL** Value provides a link to the **Prediction API URL for Production (Blue)**. Clicking on this link will open a browser page to the Prediciton API. Successful connection to the API will display the **"Ping Successfull!"** message.
+1. Open the *CloudFormation* Service Console and select the nested Stack for the Elastic Container Service (ECS). e.g. **`<<UNIQUE CLOUDFORMATION STACK NAME>>-DeploymentPipeline-...-ecs-cluster`**.
+2. Click on the CloudFormation **Outputs** tab.
+3. The **ApplicationURL** Value provides a link to the **Prediction API URL for Production (Blue)**. Clicking on this link will open a browser page to the Prediction API. Successful connection to the API will display the **"Ping Successful!"** message.
 4. To view the production (Blue) API, find the URL of a "cat" picture (e.g.[Grumpy Cat](http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg)) and add it to the URL as follows:
     
     `http://<<GitHub Repo Name>>.us-east-1.elb.amazonaws.com/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`
@@ -161,7 +161,7 @@ Included is the e-mail is a link to the *CodePipeline* Service Console to approv
 
 Accessing the (Green) API after [Step 2.](#step-2-training-the-classifier)) should correctly predict a "cat" image and thus the **Manual-Approval** stage in CodePipeline can be *Approved*. This in turn will swap the (Green) API to production (Blue), wich can be accessued using **Prediction API URL for Production (Blue)**.
 
-It is at this point that a successull integration of a **Machine Learning Pipeline** into a production **DevOps Pipeline** has been successfully demonstrated. To avoid additional charges for AWS resources, refer to the [Cleanup](#cleanup) Section.
+It is at this point that a successful integration of a **Machine Learning Pipeline** into a production **DevOps Pipeline** has been successfully demonstrated. To avoid additional charges for AWS resources, refer to the [Cleanup](#cleanup) Section.
 
 ## Troubleshooting
 Since the framework launches a significant amount of Asynchronous Lambda functions without any pre-warming, the **CloudWatch** logs may display an error similar to the following:  
@@ -179,30 +179,30 @@ To address this, simply delete all the DynamoDB Tables as well as data set (`dat
 
 ## Cleanup
 1. Delete the SageMaker Notebook instance.
-    - Open the SageMaker Service console.
-    - Select the Notebook Instance and Stop it, if the instance is still running.
-    - Select the Notebook Instance -> click Actions -> Delete.
-2. After the SageMaker Notebook Instance is deleted, delete the CloudFormnation Stack.
-    - Open the CloudFormation Service console.
+    - Open the [SageMaker Service console](https://console.aws.amazon.com/sagemaker).
+    - Select the Notebook Instance and **Stop** it, if the instance is still running.
+    - Select the Notebook Instance -> click **Actions** -> **Delete**.
+2. After the SageMaker Notebook Instance is deleted, delete the CloudFormation Stack.
+    - Open the [CloudFormation Service console](https://console.aws.com/cloudformation).
     - Ensure all nested stacks have a **CREATE_COMPLETE** or **UPDATE_COMPLETE** Status. If not, wait for any stack updates to complete.
-    - Select the Elastic Container Service (ECS) Stack created by CodePipeline. e.g. **`<<Stack Name>>-DeploymentPipeline-...-ecs-cluster`**
-    - Click Actions -> Delete Stack -> "Yes, Delete".
+    - Select the Elastic Container Service (ECS) Stack created by CodePipeline. e.g. **`<<UNIQUE CLOUDFORMATION STACK NAME>>-DeploymentPipeline-...-ecs-cluster`**
+    - Click **Actions** -> **Delete Stack** -> **Yes, Delete**.
     - Select the stack created by the initial deployment and repeat the above step.
 3. Delete DynamoDB Tables.
-    - Open DynamoDB Service console.
-    - Select "Tables" in the navigation panel.
-    - Check **NeuronLambda** -> Delete table -> Delete.
+    - Open [DynamoDB Service console](https://console.aws.amazon.com/dynamodb).
+    - Select **Tables** in the navigation panel.
+    - Check **NeuronLambda** -> **Delete table** -> **Delete**.
     - Repeat the above process for the **Costs**, **TrainerLambda** and **LaunchLambda** tables.
 4. Delete the CloudWatch Logs.
-    - Open the CloudWatch Service console.
-    - Select "Logs" in the navigation panel.
-    - Check */aws/lambda/LaunchLambda* -> Actions -> Delete log group -> Yes, Delete.
+    - Open the [CloudWatch Service console](https://console.aws.amazon.com/cloudwatch).
+    - Select **Logs** in the navigation panel.
+    - Check `/aws/lambda/LaunchLambda` -> **Actions** -> **Delete log group** -> **Yes, Delete**.
     - Repeat the above process for **NeuronLambda**, **S3TriggerLambda**, **LaunchLambda**, **TrainerLambda**  and any of the logs created by CodePipeline.
 5. Delete the S3 Bucket.
-    - Open the S3 Service console.
-    - Highlite the bucket created at deployment time -> Delete bucket.
+    - Open the [S3 Service console](https://console.aws.amazon.com/s3).
+    - Highlight the bucket created at deployment time -> **Delete** bucket.
     - Perform the same actions for the bucket used by CodePipeline for artifacts.
 6. Delete any Elastic Container Repositories (ECR) created by CodePipeline.
-    - Open the amazon ECS Service Console.
-    - Select Amazon ECR -> Repositories.
-    - Check the relevant ERC Repositories -> Click Delete Repository.
+    - Open the amazon [ECS Service Console](https://console.aws.amazon.com/ecs).
+    - Select Amazon ECR -> *8Repositories**.
+    - Check the relevant ECR Repositories -> Click **Delete Repository**.
