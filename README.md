@@ -19,7 +19,7 @@
 ```console
     "Successfully created/updated stack - <<UNIQUE CLOUDFOMRATION STACK NAME>>"
 ```
->**Note:** During the deployment, and e-mail will be sent to the specified address. __Make sure to confirm the subscription to the SNS Topic!__
+>**Note:** During the deployment, and e-mail will be sent to the specified address. __Make sure to confirm the subscription to the SNS Topic!__ Additionally, after the stack is created, the CodePipeline is triggered, ignore any **CodePipeline Approval** messages as these are addressed in [Step 2](#step-2-production-api).
 
 ## SageMaker Notebook Instance
 Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon.com/sagemaker/) Notebook Instance by using the following steps:
@@ -58,9 +58,9 @@ The `ItsaCat-Gluon_Codebook.ipynb` has been created to explain the typical proce
 
 Work through these steps on the Notebook to see the pipeline in action.
 - To run the notebook document step-by-step (one cell a time) by pressing shift + enter.
-- To run the whole notebook in a single step by clicking on the menu **Cell** -> **Run All**.
 - To restart the kernel (i.e. the computational engine), click on the menu **Kernel** -> **Restart**. This can be useful to start over a computation from scratch (e.g. variables are deleted, open files are closed, etc…).
 - More information on editing a notebook can be found on the [Notebook Basics](http://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Notebook%20Basics.ipynb) page.
+>**Note:** Do not run the whole notebook in a single step as some cells require adding the SageMaker Job Name variable.
 
 ### Step 2. - Production API
 After the model has been optimally trained and validated in [Step 1.](#step-1-jupyter-notebook), it can be integrated into the Production application by leveraging the *DevOps* process. To accomplish this, follow these steps:
@@ -87,7 +87,7 @@ After the model has been optimally trained and validated in [Step 1.](#step-1-ju
 ```
 >Included is the e-mail is a link to the *CodePipeline* Service Console to approve the deployment from QA to Production. 
 3. To view and test the Prediction API in the QA stage, open the *CloudFormation* Service Console and select the nested Stack for the Elastic Container Service (ECS). e.g. **`<<UNIQUE CLOUDFORMATION STACK NAME>>-DeploymentPipeline-...-ecs-cluster`**.
-4. Click on the CloudFormation **Outputs** tab. The **ApplicationURL** Value provides a link to the **Prediction API URL for Production (Blue)**. Clicking on this link will open a browser page to the Prediction API. Successful connection to the API will display the **"Ping Successfull!"** message.
+4. Click on the CloudFormation **Outputs** tab. The **ApplicationURL** Value provides a link to the **Prediction API URL for Production (Blue)**. Clicking on this link will open a browser page to the Prediction API. Successful connection to the API will display the **"Ping Successful!"** message.
 5. To view the production (Blue) API, find the URL of a "cat" picture (e.g.[Grumpy Cat](http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg)) and add it to the URL as follows:
     
     `http://<<GitHub Repo Name>>.us-east-1.elb.amazonaws.com/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`
@@ -112,7 +112,11 @@ Additionally, use the AWS Management Console to delete any additional resources 
 2. Open the [Amazon S3 console](https://console.aws.amazon.com/s3/) and delete the bucket that was created for storing model artifacts and the training dataset.
 3. Open the [IAM console](https://console.aws.amazon.com/iam/) and delete the IAM role. If permission policies were created, delete them, too.
 4. Open the [Amazon CloudWatch console](https://console.aws.amazon.com/cloudwatch/) and delete all of the log groups that have names starting with `/aws/sagemaker/`.
-5. Open the [AWS CloudFormation Console](https://console.aws.amazon.com/cloudformation/home) and delete **TBD**
+5. Open the [AWS CloudFormation Console](https://console.aws.amazon.com/cloudformation/home).
+    - Ensure all the nested stacks have a **CREATE_COMPLETE** or **UPDATE COMPLETE** status. If not, wait for any stack updates to complete.
+    - Select the Elastic Container Service (RCS) Stack created by CodePipeline. e.g. **`<<UNIQUE CLOUDFORMATION STACK NAME>>-DeploymentPipeline-...-ecs-cluster`**
+    - Click **Actions** -> **Delete Stack** -> **Yes, Delete**.
+    - Select the stack created by the initial deployment and repeat the above step.
 6. Delete any Elastic Container Repositories (ECR) created by CodePipeline.
     - Open the amazon ECS Service Console.
     - Select Amazon ECR -> Repositories.
