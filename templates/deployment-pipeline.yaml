@@ -394,7 +394,7 @@ Resources:
               OutputArtifacts:
                 - Name: App
               RunOrder: 1
-            - Name: Template
+            - Name: Templates
               ActionTypeId:
                 Category: Source
                 Owner: AWS
