@@ -90,11 +90,11 @@ After the model has been optimally trained and validated in [Step 1.](#step-1-ju
 4. Click on the CloudFormation **Outputs** tab. The **ApplicationURL** Value provides a link to the **Prediction API URL for Production (Blue)**. Clicking on this link will open a browser page to the Prediction API. Successful connection to the API will display the **"Ping Successful!"** message.
 5. To view the production (Blue) API, find the URL of a "cat" picture (e.g.[Grumpy Cat](http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg)) and add it to the URL as follows:
     
-    `http://<<GitHub Repo Name>>.us-east-1.elb.amazonaws.com/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`
+    `http://<<ApplicationURL>>/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`
 
 6. To view the Test/Staging (Green) API, simply change the port to **8080** as follows:
 
-    `http://<<GitHub Repo Name>>.us-east-1.elb.amazonaws.com:8080/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`  
+    `http://<<ApplicationURL>>:8080/image?image=http://i0.kym-cdn.com/entries/icons/facebook/000/011/365/GRUMPYCAT.jpg`  
 
 7. Accessing the (Green) API should correctly predict a "cat" image and thus the **Manual-Approval** stage in CodePipeline can be *Approved*. This in turn will swap the (Green) API to production (Blue), which can be accessed using **Prediction API URL for Production (Blue)**.
 

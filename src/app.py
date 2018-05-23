@@ -15,6 +15,7 @@ from flask import Flask, Response, request, jsonify, render_template
 from PIL import Image
 from skimage import transform
 
+logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.INFO)
 build_id = str(os.environ['BUILD_ID'])[:7]
