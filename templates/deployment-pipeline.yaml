@@ -1,5 +1,5 @@
 Description: >
-  This Template creates the CodePipeline and CodeBuild resources for Blue/Green Deployment of the Prediciton API on ECS.
+  This Template creates the CodePipeline and CodeBuild resources for Blue/Green Deployment of the Prediciton API on AWS Fargate.
 
 Parameters:
   EnvironmentName:
