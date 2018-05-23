@@ -25,7 +25,7 @@ sagemaker_client = boto3.client('sagemaker')
 list_results = sagemaker_client.list_endpoints(
     SortBy='Name',
     NameContains=build_id,
-    MaxResults=1,
+#    MaxResults=1,
     StatusEquals='InService'
 )
 if not list_results['Endpoints']:
