@@ -14,7 +14,7 @@ Below is a table highlighting some of the *Pros* and *Cons* of using this method
 |    | - Inflexibility of the framework to try alternate optimization methods. |
 |    | - Model training can delay DevOps Delivery process. |
 
-2. The second demonstration **(Leveraging MXNet for Image Classification)** addresses the **Cons** (listed in the Table above), by leveraging [Amazon SageMaker](https://aws.amazon.com/sagemaker/?sc_channel=PS&sc_campaign=pac_ps_q4&sc_publisher=google&sc_medium=sagemaker_b_pac_search&sc_content=sagemaker_e&sc_detail=aws%20sagemaker&sc_category=sagemaker&sc_segment=webp&sc_matchtype=e&sc_country=US&sc_geo=namer&sc_outcome=pac&s_kwcid=AL!4422!3!245225393502!e!!g!!aws%20sagemaker&ef_id=WmohTgAAAMdt-TCT:20180517221409:s) to build, train and deploy the same MLP model at scale. **Amazon SageMaker** addresses the various issues by:
+2. The second demonstration **(Leveraging MXNet for Image Classification)** addresses the **Cons** (listed in the Table above), by leveraging [Amazon SageMaker](https://aws.amazon.com/sagemaker/?sc_channel=PS&sc_campaign=pac_ps_q4&sc_publisher=google&sc_medium=sagemaker_b_pac_search&sc_content=sagemaker_e&sc_detail=aws%20sagemaker&sc_category=sagemaker&sc_segment=webp&sc_matchtype=e&sc_country=US&sc_geo=namer&sc_outcome=pac&s_kwcid=AL!4422!3!245225393502!e!!g!!aws%20sagemaker&ef_id=WmohTgAAAMdt-TCT:20180517221409:s) and [MXNet](https://mxnet.incubator.apache.org) Deep Learning Framework the to build, train and deploy the same MLP model at scale. **Amazon SageMaker** addresses the various issues by:
 
     - Providing an integrated Notebook instance, allowing user to explore AWS data in [Jupyter Notebooks](http://jupyter.org), and use algorithms to create models via training jobs.  
 
