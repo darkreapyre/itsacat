@@ -57,9 +57,14 @@ This demo uses the [AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/cli
     $ cd itsacat
     $ git checkout Demo-1
     ```
-    2.2 For the **Leveraging Amazon SageMaker for Image Classification**, run the the following:
+    2.2 For the **Leveraging the MXNet Deep LEarning Framework for Image Classification**, run the the following:
     ```
     $ cd itsacat
     $ git checkout Demo-2
+    ```
+    2.3 For the **Leveraging SageMaker's Built-in Image Classifier** Demo, runthe following:
+    ```
+    $ cd itsacat
+    $ git checkout Demo-3
     ```
 3. View the **README** for the particular demo for specific instructions on how it's run.
