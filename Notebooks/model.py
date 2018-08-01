@@ -190,6 +190,7 @@ def eval_acc(data_iterator, net, ctx):
         output = net(data)
         predictions = nd.argmax(output, axis=1)
         acc.update(preds=predictions, labels=label)
+        acc.reset()
     return acc.get()[1]
 
 # ---------------------------------------------------------------------------- #
