@@ -1,4 +1,4 @@
-# Demo 2/3 - Leveraging Amazon SageMaker for Image Classification
+# Demo 2 - Leveraging Amazon SageMaker for Image Classification
 
 ![Architecture](https://github.com/darkreapyre/itsacat/blob/Demo-2/Notebooks/images/Architecture.png)
 
@@ -46,17 +46,26 @@ Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon
     - Go back to the **Files** tab -> click `itsacat` -> click **Notebooks** -> select `ItsaCat-Gluon_Codebook.ipynb`
 
 ## Demo Process Flow
-To follow the Machine Learning Pipeline process flow the two steps listed below:
+To follow the Machine Learning Pipeline process flow steps listed below:
 
-### Step 1. - Jupyter Notebook
-The `ItsaCat-Gluon_Codebook.ipynb` has been created to explain the typical process the *Data Scientist* follows within the Machine Learning Pipeline, namely:
+### Step 1a. - Using Apache MXNet
+The `ItsaCat-SageMaker_Gluon.ipynb` has been created to explain the typical process the *Data Scientist* follows within the Machine Learning Pipeline using SageMaker's Built-in MXNet framework support, namely:
 
 1. Using the Notebook instance to understand and Manage the Input Data.
-2. Training the Classifier as a SageMaker Training Job.
+2. Training the Classifier using the MXNet Estimator.
 3. Performance Analysis of the Trained Model.
 4. Performance Analysis of the Inference Endpoint.
 
-Work through these steps on the Notebook to see the pipeline in action.
+### Step 1b. - Using the builr-in Image Classifier
+The `ItsaCat-SageMaker_Classifier.ipynb` has been created to demonstrate how easy it is to simple let SageMaker take care of the heravy lifting of Image Classification, by leveraging the build-in classifation algorithm to perform the following:
+
+1. Using the Notebook instance to understand and Manage the Input Data.
+2. Training the Classifier as a SageMaker's built-in Image Classification Algorithm.
+3. Performance Analysis of the Trained Model.
+4. Performance Analysis of the Inference Endpoint.
+
+#### Jupyter Notebooks
+Work through the steps above, use the SageMaker Notebook Instance to see the pipeline in action.
 - To run the notebook document step-by-step (one cell a time) by pressing shift + enter.
 - To restart the kernel (i.e. the computational engine), click on the menu **Kernel** -> **Restart**. This can be useful to start over a computation from scratch (e.g. variables are deleted, open files are closed, etc…).
 - More information on editing a notebook can be found on the [Notebook Basics](http://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Notebook%20Basics.ipynb) page.
