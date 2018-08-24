@@ -56,8 +56,8 @@ The `ItsaCat-SageMaker_Gluon.ipynb` has been created to explain the typical proc
 3. Performance Analysis of the Trained Model.
 4. Performance Analysis of the Inference Endpoint.
 
-### Step 1b. - Using the builr-in Image Classifier
-The `ItsaCat-SageMaker_Classifier.ipynb` has been created to demonstrate how easy it is to simple let SageMaker take care of the heravy lifting of Image Classification, by leveraging the build-in classifation algorithm to perform the following:
+### Step 1b. - Using the built-in Image Classifier
+The `ItsaCat-SageMaker_Classifier.ipynb` has been created to demonstrate how easy it is to simple let SageMaker take care of the heavy lifting of Image Classification, by leveraging the build-in classification algorithm to perform the following:
 
 1. Using the Notebook instance to understand and Manage the Input Data.
 2. Training the Classifier as a SageMaker's built-in Image Classification Algorithm.
