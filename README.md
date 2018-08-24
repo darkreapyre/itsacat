@@ -48,7 +48,7 @@ Once the stack has been deployed, start an [Amazon SageMaker](https://aws.amazon
 ## Demo Process Flow
 To follow the Machine Learning Pipeline process flow steps listed below:
 
-### Step 1a. - Using Apache MXNet
+### Step 1a. - Using Custom MXNet Model and the Gluon API
 The `ItsaCat-SageMaker_Gluon.ipynb` has been created to explain the typical process the *Data Scientist* follows within the Machine Learning Pipeline using SageMaker's Built-in MXNet framework support, namely:
 
 1. Using the Notebook instance to understand and Manage the Input Data.
@@ -56,7 +56,7 @@ The `ItsaCat-SageMaker_Gluon.ipynb` has been created to explain the typical proc
 3. Performance Analysis of the Trained Model.
 4. Performance Analysis of the Inference Endpoint.
 
-### Step 1b. - Using the built-in Image Classifier
+### Step 1b. - Using the Built-in Image Classification Algorithm
 The `ItsaCat-SageMaker_Classifier.ipynb` has been created to demonstrate how easy it is to simple let SageMaker take care of the heavy lifting of Image Classification, by leveraging the build-in classification algorithm to perform the following:
 
 1. Using the Notebook instance to understand and Manage the Input Data.
